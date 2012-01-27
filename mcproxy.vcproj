@@ -706,6 +706,26 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="utils"
+			>
+			<File
+				RelativePath=".\utils\MinecraftUtils.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\utils\MinecraftUtils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\utils\Timer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\utils\Timer.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath=".\Authentication.cpp"
 			>
@@ -740,14 +760,6 @@
 		</File>
 		<File
 			RelativePath=".\main.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\MinecraftUtils.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\MinecraftUtils.h"
 			>
 		</File>
 		<File

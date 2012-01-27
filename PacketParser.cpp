@@ -60,8 +60,6 @@ void PacketParser::parseInput(const char *pData, size_t iSize)
 	for (std::string::iterator i = m_strBuffer.begin(); i != m_strBuffer.end();)
 	{
 		unsigned char p = (unsigned char) *i;
-		if (m_packetSource == CLIENT && p != 0x0A)
-			printf("client packet %02X\n", p);
 		++i; // skip packet id
 
 		Packet *pack = Packets::createPacket((int) p);

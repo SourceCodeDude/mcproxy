@@ -71,17 +71,30 @@ private:
 #include "ProxyClient.h"
 #include "ProxySocket.h"
 #include <ListenSocket.h>
+#include "utils/Timer.h"
 
-class MyProxy : public ProxyClient
+class MyProxy : public ProxyClient, public Timer
 {
 public:
 	MyProxy(ISocketHandler &h)
 		: ProxyClient(h)
 	{
-		setServer("x.mavedev.com");
+		setServer("evocraft.net");
+
+		addTimer(NULL, 1.0f, 0);
+	}
+
+	void update()
+	{
+		updateTimers();
 	}
 
 private:
+	void onTimer(DWORD dwTimer, void *pUserData)
+	{
+		printf("TIMER!! %p / %p\n", dwTimer, pUserData);
+	}
+
 	void onChat(const std::wstring &wstrMessage)
 	{
 		wprintf(L"[CHAT-%d] %s\n", getPacketSource(), wstrMessage.c_str());
@@ -132,6 +145,7 @@ int main(int argc, char *argv[])
 	{
 		if (h.GetCount())
 			h.Select(0, 5 * 1000);
+		p->update();
 	}
 	while (true);
 
