@@ -1,6 +1,6 @@
 #include "StdInc.h"
 #include "WindowSlot.h"
-#include "../MinecraftUtils.h"
+#include "../utils/MinecraftUtils.h"
 #include <vector>
 
 bool WindowSlot::readPacket(PacketParser *pParser)
@@ -18,8 +18,7 @@ bool WindowSlot::readPacket(PacketParser *pParser)
 			short iSize = pParser->getShort();
 			if (iSize != -1)
 			{
-				std::vector<unsigned char> vecBytes;
-				vecBytes.resize(iSize);
+				std::vector<unsigned char> vecBytes(iSize);
 				pParser->getBytes((unsigned char *)&vecBytes[0], iSize);
 			}
 		}

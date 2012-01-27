@@ -1,6 +1,6 @@
 #include "StdInc.h"
 #include "PlayerBlockPlacement.h"
-#include "../MinecraftUtils.h"
+#include "../utils/MinecraftUtils.h"
 #include <vector>
 
 bool PlayerBlockPlacement::readPacket(PacketParser *pParser)
@@ -20,8 +20,7 @@ bool PlayerBlockPlacement::readPacket(PacketParser *pParser)
 			short iSize = pParser->getShort();
 			if (iSize != -1)
 			{
-				std::vector<unsigned char> vecBytes;
-				vecBytes.resize(iSize);
+				std::vector<unsigned char> vecBytes(iSize);
 				pParser->getBytes((unsigned char *)&vecBytes[0], iSize);
 			}
 		}

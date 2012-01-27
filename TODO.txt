@@ -1,8 +1,3 @@
 - (Proxy) Handle disconnects, reconnects
-- (Proxy) Parse client packets too,
-    rename current PacketHandler(+Helper) to ServerPacketHandler(+Helper)
-    rename Packet::readPacket from all packets to readServerPacket
-    add ClientPacketHandler(+Helper) and Packet::readClientPacket
-    might have to rename all server callbacks to onServer* ?
 - Add ability to send packets with Packet::write(Server/Client)Packet
 - Change int types in code to those from stdint.h (int32_t ...)

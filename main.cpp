@@ -13,7 +13,7 @@ class MyBot : public BotClient
 {
 public:
 	MyBot(ISocketHandler &h)
-		: BotClient("JamieT", h)
+		: BotClient("sh0x1337", h)
 	{
 		m_bHasPosition = false;
 	}
@@ -34,6 +34,11 @@ private:
 		printf("we're connected\n");
 	}
 
+	void onKick(const std::wstring &wstrMessage)
+	{
+		wprintf(L"[KICK] %s\n", wstrMessage.c_str());
+	}
+
 	void onChat(const std::wstring &wstrMessage)
 	{
 		wprintf(L"[CHAT] %s\n", wstrMessage.c_str());
@@ -42,6 +47,9 @@ private:
 	void onSpawnPosition(int iX, int iY, int iZ)
 	{
 		printf("got spawn position (%.2f, %.2f, %.2f)\n", m_fX, m_fY, m_fZ);
+
+		//std::string msg("/msg FlakeyGuy i am bot");
+		//sendf(3 + (msg.length() * 2), "ct", 0x03, msg.c_str());
 	}
 
 	void onHealthUpdate(short iHealth, short iFood, float fSaturation)
@@ -51,7 +59,7 @@ private:
 		{
 			printf("Dead, respawning.\n");
 
-			sendf(14, "ccccsl", 0x09, 0, 1, 0, 128, 0);
+			sendf(16, "ccccslt", 0x09, 0, 1, 0, 128, 0LL, "");
 		}
 	}
 
@@ -59,9 +67,9 @@ private:
 	{
 		printf("got 0x0D, %.2f/%.2f/%.2f, %d\n", (float)dX, (float)dY, (float)dZ, bGround ? 1 : 0);
 		m_bHasPosition = true;
-		m_fX = (float)dX;
-		m_fY = (float)dY;
-		m_fZ = (float)dZ;
+		m_fX = (float) dX;
+		m_fY = (float) dY;
+		m_fZ = (float) dZ;
 	}
 
 	bool m_bHasPosition;
@@ -101,11 +109,6 @@ private:
 	}
 };
 
-/*Authentication auth;
-printf("login ret %d\n", auth.login("maveok", "no"));
-printf("user: '%s'\n", auth.getUsername().c_str());
-printf("sess: '%s'\n", auth.getSessionId().c_str());*/
-
 #include "ProxyHandler.h"
 #include <StdoutLog.h>
 
@@ -129,10 +132,12 @@ int main(int argc, char *argv[])
 	Endian::init();
 	Packets::init();
 
-	ProxyHandler h;
-	StdoutLog log(LOG_LEVEL_INFO);
-	h.RegStdLog(&log);
+	SocketHandler h;
 
+	//StdoutLog log(LOG_LEVEL_INFO);
+	//h.RegStdLog(&log);
+
+	/*ProxyHandler h;
 	ListenSocket<ProxySocket> l(h);
 	if (l.Bind(25565))
 	{
@@ -147,15 +152,21 @@ int main(int argc, char *argv[])
 			h.Select(0, 5 * 1000);
 		p->update();
 	}
-	while (true);
+	while (true);*/
 
-	/*SocketHandler h;
+Authentication auth;
+printf("login ret %d\n", auth.login("maveok", "no"));
+printf("user: '%s'\n", auth.getUsername().c_str());
+printf("sess: '%s'\n", auth.getSessionId().c_str());
+
 	MyBot *b = new MyBot(h);
 
+	b->setAuthentication(&auth);
+
 	b->SetDeleteByHandler();
-	b->Open("91.121.178.221", 26565);
+	b->Open("evocraft.net", 25565);
 	h.Add(b);
-	
+
 	clock_t nextTick = clock();
 	do
 	{
@@ -170,7 +181,7 @@ int main(int argc, char *argv[])
 	}
 	while (h.GetCount());
 
-	delete b;*/
+	//delete b;
 
 	getchar();
 	return 0;

@@ -1,6 +1,6 @@
 #include "StdInc.h"
 #include "WindowClick.h"
-#include "../MinecraftUtils.h"
+#include "../utils/MinecraftUtils.h"
 #include <vector>
 
 bool WindowClick::readPacket(PacketParser *pParser)
@@ -22,8 +22,7 @@ bool WindowClick::readPacket(PacketParser *pParser)
 			short iSize = pParser->getShort();
 			if (iSize != -1)
 			{
-				std::vector<unsigned char> vecBytes;
-				vecBytes.resize(iSize);
+				std::vector<unsigned char> vecBytes(iSize);
 				pParser->getBytes((unsigned char *)&vecBytes[0], iSize);
 			}
 		}

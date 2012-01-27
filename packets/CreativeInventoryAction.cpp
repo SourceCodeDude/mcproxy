@@ -1,6 +1,6 @@
 #include "StdInc.h"
 #include "CreativeInventoryAction.h"
-#include "../MinecraftUtils.h"
+#include "../utils/MinecraftUtils.h"
 #include <vector>
 
 bool CreativeInventoryAction::readPacket(PacketParser *pParser)
@@ -19,8 +19,7 @@ bool CreativeInventoryAction::readPacket(PacketParser *pParser)
 			short iSize = pParser->getShort();
 			if (iSize != -1)
 			{
-				std::vector<unsigned char> vecBytes;
-				vecBytes.resize(iSize);
+				std::vector<unsigned char> vecBytes(iSize);
 				pParser->getBytes((unsigned char *)&vecBytes[0], iSize);
 			}
 		}

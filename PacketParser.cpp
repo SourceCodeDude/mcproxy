@@ -54,7 +54,6 @@ IPacketHandler *PacketParser::getPacketHandlerHelper()
 void PacketParser::parseInput(const char *pData, size_t iSize)
 {
 	m_strBuffer.append(pData, iSize);
-
 	std::string::iterator strip = m_strBuffer.begin();
 
 	for (std::string::iterator i = m_strBuffer.begin(); i != m_strBuffer.end();)

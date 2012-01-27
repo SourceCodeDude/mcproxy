@@ -1,6 +1,6 @@
 #include "StdInc.h"
 #include "WindowItems.h"
-#include "../MinecraftUtils.h"
+#include "../utils/MinecraftUtils.h"
 #include <vector>
 
 bool WindowItems::readPacket(PacketParser *pParser)
@@ -21,8 +21,7 @@ bool WindowItems::readPacket(PacketParser *pParser)
 				short iSize = pParser->getShort();
 				if (iSize != -1)
 				{
-					std::vector<unsigned char> vecBytes;
-					vecBytes.resize(iSize);
+					std::vector<unsigned char> vecBytes(iSize);
 					pParser->getBytes((unsigned char *)&vecBytes[0], iSize);
 				}
 			}

@@ -4,12 +4,15 @@ class BotClient;
 #define _BOTCLIENT_H
 
 #include "VanillaClient.h"
+#include "Authentication.h"
 
 class BotClient : public VanillaClient
 {
 public:
 	BotClient(const std::string &strName, ISocketHandler &h);
 	~BotClient();
+
+	void setAuthentication(Authentication *pAuth);
 
 protected:
 	void OnConnect();
@@ -19,6 +22,8 @@ protected:
 
 private:
 	std::string m_strName;
+
+	Authentication *m_pAuth;
 };
 
 #endif

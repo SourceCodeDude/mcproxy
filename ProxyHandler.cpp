@@ -49,7 +49,7 @@ void ProxyHandler::notifyProxySocket(ProxySocket *pSocket)
 			}
 			else
 			{
-				printf("open %d\n", m_pClient->Open(strHostname, iPort));
+				m_pClient->Open(strHostname, iPort);
 				m_pClient->SetDeleteByHandler(false);
 				Add(m_pClient);
 			}

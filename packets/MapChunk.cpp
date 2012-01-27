@@ -13,8 +13,7 @@ bool MapChunk::readPacket(PacketParser *pParser)
 	char cSZ = pParser->getByte();
 	int iSize = pParser->getInt();
 	
-	std::vector<unsigned char> vecBytes;
-	vecBytes.resize(iSize);
+	std::vector<unsigned char> vecBytes(iSize);
 	pParser->getBytes((unsigned char *)&vecBytes[0], iSize);
 	//printf("[CHUNK] %d/%d/%d size %d/%d/%d (B %d)\n", iX, y, iZ, cSX, cSY, cSZ, iSize);
 

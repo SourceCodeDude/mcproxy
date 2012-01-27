@@ -10,8 +10,7 @@ bool Explosion::readPacket(PacketParser *pParser)
 	float fRadius = pParser->getFloat();
 	int iCount = pParser->getInt();
 
-	std::vector<unsigned char> vecBytes;
-	vecBytes.resize(iCount * 3);
+	std::vector<unsigned char> vecBytes(iCount * 3);
 	pParser->getBytes((unsigned char *)&vecBytes[0], iCount * 3);
 
 	pParser->getPacketHandlerHelper()->onExplosion(dX, dY, dZ, fRadius, iCount);
