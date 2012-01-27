@@ -1,4 +1,3 @@
-- (Proxy) Improve proxy connecting method
 - (Proxy) Handle disconnects, reconnects
 - (Proxy) Parse client packets too,
     rename current PacketHandler(+Helper) to ServerPacketHandler(+Helper)

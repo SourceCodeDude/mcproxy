@@ -28,6 +28,8 @@ private:
 
 	std::string m_strHostname;
 	int m_iPort;
+
+	PacketParser *m_pPacketParser;
 };
 
 #endif

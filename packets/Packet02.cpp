@@ -3,9 +3,9 @@
 
 bool Packet02::readPacket(PacketParser *pParser)
 {
-	std::wstring wstrHash = pParser->getString();
+	std::wstring wstrHashOrUsername = pParser->getString();
 
-	pParser->getPacketHandlerHelper()->onHandshake(wstrHash);
+	pParser->getPacketHandlerHelper()->onHandshake(wstrHashOrUsername);
 	return true;
 }
 

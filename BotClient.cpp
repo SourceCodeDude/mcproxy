@@ -19,7 +19,7 @@ void BotClient::OnConnect()
 	sendf(3 + (2 * m_strName.length()), "ct", 0x02, m_strName.c_str());
 }
 
-void BotClient::onHandshake(const std::wstring &wstrHash)
+void BotClient::onHandshake(const std::wstring &wstrHashOrUsername)
 {
 	// send 0x01 login packet
 	sendf(23 + (2 * m_strName.length()), "citlicccc", 0x01, PROTOCOL_VERSION, m_strName.c_str(), 0LL, 0, 0, 0, 0, 0);

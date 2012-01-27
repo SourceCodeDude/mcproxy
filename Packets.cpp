@@ -18,6 +18,9 @@ void Packets::init()
 	m_packetFactory[0x07] = CreatePacket_UseEntity;
 	m_packetFactory[0x08] = CreatePacket_HealthUpdate;
 	m_packetFactory[0x09] = CreatePacket_Respawn;
+	m_packetFactory[0x0A] = CreatePacket_Player;
+	m_packetFactory[0x0B] = CreatePacket_PlayerPosition;
+	m_packetFactory[0x0C] = CreatePacket_PlayerLook;
 	m_packetFactory[0x0D] = CreatePacket_PlayerPositionLook;
 	m_packetFactory[0x0E] = CreatePacket_PlayerDigging;
 	m_packetFactory[0x0F] = CreatePacket_PlayerBlockPlacement;
@@ -56,16 +59,19 @@ void Packets::init()
 	m_packetFactory[0x47] = CreatePacket_Thunderbolt;
 	m_packetFactory[0x64] = CreatePacket_OpenWindow;
 	m_packetFactory[0x65] = CreatePacket_WindowClose;
+	m_packetFactory[0x66] = CreatePacket_WindowClick;
 	m_packetFactory[0x67] = CreatePacket_WindowSlot;
 	m_packetFactory[0x68] = CreatePacket_WindowItems;
 	m_packetFactory[0x69] = CreatePacket_WindowProperty;
 	m_packetFactory[0x6A] = CreatePacket_Transaction;
 	m_packetFactory[0x6B] = CreatePacket_CreativeInventoryAction;
+	m_packetFactory[0x6C] = CreatePacket_EnchantItem;
 	m_packetFactory[0x82] = CreatePacket_UpdateSign;
 	m_packetFactory[0x83] = CreatePacket_ItemData;
 	m_packetFactory[0xC8] = CreatePacket_IncrementStatistic;
 	m_packetFactory[0xC9] = CreatePacket_PlayerListItem;
 	m_packetFactory[0xFA] = CreatePacket_PluginMessage;
+	m_packetFactory[0xFE] = CreatePacket_ServerListPing;
 	m_packetFactory[0xFF] = CreatePacket_Kick;
 }
 

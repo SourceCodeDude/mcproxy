@@ -5,7 +5,7 @@
 VanillaClient::VanillaClient(ISocketHandler &h)
 	: TcpSocket(h)
 {
-	m_pPacketParser = new PacketParser();
+	m_pPacketParser = new PacketParser(SERVER);
 	m_pPacketParser->registerPacketHandler(this);
 }
 

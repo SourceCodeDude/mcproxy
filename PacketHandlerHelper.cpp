@@ -49,7 +49,7 @@ void PacketHandlerHelper::onNamedEntitySpawn(int iEntity, const std::wstring &ws
 void PacketHandlerHelper::onNewInvalidState(unsigned char ucReason, unsigned char ucGamemode) { MASS_EVENT(onNewInvalidState, ucReason, ucGamemode) }
 void PacketHandlerHelper::onOpenWindow(unsigned char ucWindow, unsigned char ucType, const std::wstring &wstrTitle, unsigned char ucNumSlots) { MASS_EVENT(onOpenWindow, ucWindow, ucType, wstrTitle, ucNumSlots) }
 void PacketHandlerHelper::onPacket01(int iEntity, const std::wstring &wstrUnused, __int64 iSeed, const std::wstring &wstrLevelType, int iMode, unsigned char ucDimension, unsigned char ucDifficulty, unsigned char ucHeight, unsigned char ucMaxPlayers) { MASS_EVENT(onPacket01, iEntity, wstrUnused, iSeed, wstrLevelType, iMode, ucDimension, ucDifficulty, ucHeight, ucMaxPlayers) }
-void PacketHandlerHelper::onHandshake(const std::wstring &wstrHash) { MASS_EVENT(onHandshake, wstrHash) }
+void PacketHandlerHelper::onHandshake(const std::wstring &wstrHashOrUsername) { MASS_EVENT(onHandshake, wstrHashOrUsername) }
 void PacketHandlerHelper::onPainting(int iEntity, const std::wstring &wstrTitle, int iX, int iY, int iZ, int iDirection) { MASS_EVENT(onPainting, iEntity, wstrTitle, iX, iY, iZ, iDirection) }
 void PacketHandlerHelper::onPickupSpawn(int iEntity, short iItem, unsigned char ucCount, short iDamage, int iX, int iY, int iZ, char cRot, char cPitch, char cRoll) { MASS_EVENT(onPickupSpawn, iEntity, iItem, ucCount, iDamage, iX, iY, iZ, cRot, cPitch, cRoll) }
 void PacketHandlerHelper::onKeepAlive(int iRandom) { MASS_EVENT(onKeepAlive, iRandom) }
@@ -72,3 +72,9 @@ void PacketHandlerHelper::onWindowClose(unsigned char ucWindow) { MASS_EVENT(onW
 void PacketHandlerHelper::onWindowItems(unsigned char ucWindow, short iCount) { MASS_EVENT(onWindowItems, ucWindow, iCount) }
 void PacketHandlerHelper::onWindowProperty(unsigned char ucWindow, short iProperty, short iValue) { MASS_EVENT(onWindowProperty, ucWindow, iProperty, iValue) }
 void PacketHandlerHelper::onWindowSlot(unsigned char ucWindow, short iSlot, short iItem, unsigned char ucQty, short iUses) { MASS_EVENT(onWindowSlot, ucWindow, iSlot, iItem, ucQty, iUses) }
+void PacketHandlerHelper::onWindowClick(unsigned char ucWindow, short iSlot, bool bRightClick, short iAction, bool bShift) { MASS_EVENT(onWindowClick, ucWindow, iSlot, bRightClick, iAction, bShift) }
+void PacketHandlerHelper::onEnchantItem(unsigned char ucWindow, unsigned char ucEnchantment) { MASS_EVENT(onEnchantItem, ucWindow, ucEnchantment) }
+void PacketHandlerHelper::onPlayer(bool bOnGround) { MASS_EVENT(onPlayer, bOnGround) }
+void PacketHandlerHelper::onServerListPing() { MASS_EVENT(onServerListPing) }
+void PacketHandlerHelper::onPlayerPosition(double dX, double dY, double dStance, double dZ, bool bGround) { MASS_EVENT(onPlayerPosition, dX, dY, dStance, dZ, bGround) }
+void PacketHandlerHelper::onPlayerLook(float fYaw, float fPitch, bool bOnGround) { MASS_EVENT(onPlayerLook, fYaw, fPitch, bOnGround) }

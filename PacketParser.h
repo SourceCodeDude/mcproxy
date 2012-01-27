@@ -6,8 +6,8 @@ class PacketParser;
 #include <string>
 #include <exception>
 #include <list>
-#include "IPacketHandler.h"
 #include "PacketHandlerHelper.h"
+#include "PacketSource.h"
 
 class PacketParser
 {
@@ -26,8 +26,10 @@ public:
 		int m_iMinMissingBytes;
 	};
 
-	PacketParser();
+	PacketParser(ePacketSource packetSource);
 	~PacketParser();
+
+	ePacketSource getPacketSource();
 
 	void registerPacketHandler(IPacketHandler *pHandler);
 	bool unregisterPacketHandler(IPacketHandler *pHandler);
@@ -48,6 +50,7 @@ public:
 	void getMetadata();
 
 private:
+	ePacketSource m_packetSource;
 	std::string m_strBuffer;
 	std::string::iterator m_itCurrentIterator;
 	int m_iLastCompletePacket;

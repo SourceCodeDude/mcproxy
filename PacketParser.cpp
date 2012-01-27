@@ -3,10 +3,10 @@
 #include "Endian.h"
 #include "Packets.h"
 
-PacketParser::PacketParser()
+PacketParser::PacketParser(ePacketSource packetSource)
+	: m_packetSource(packetSource), m_iLastCompletePacket(-1)
 {
 	m_pPacketHandlerHelper = new PacketHandlerHelper(this);
-	m_iLastCompletePacket = -1;
 }
 
 PacketParser::~PacketParser()
@@ -14,8 +14,21 @@ PacketParser::~PacketParser()
 	delete m_pPacketHandlerHelper;
 }
 
+ePacketSource PacketParser::getPacketSource()
+{
+	return m_packetSource;
+}
+
 void PacketParser::registerPacketHandler(IPacketHandler *pHandler)
 {
+	for (std::list<IPacketHandler *>::iterator i = m_lstPacketHandlers.begin(); i != m_lstPacketHandlers.end(); ++i)
+	{
+		if (*i == pHandler)
+		{
+			return;
+		}
+	}
+
 	m_lstPacketHandlers.push_back(pHandler);
 }
 
@@ -46,24 +59,41 @@ void PacketParser::parseInput(const char *pData, size_t iSize)
 
 	for (std::string::iterator i = m_strBuffer.begin(); i != m_strBuffer.end();)
 	{
-		unsigned char p = (unsigned char)*i;
+		unsigned char p = (unsigned char) *i;
+		if (m_packetSource == CLIENT && p != 0x0A)
+			printf("client packet %02X\n", p);
 		++i; // skip packet id
 
-		Packet *pack = Packets::createPacket((int)p);
+		Packet *pack = Packets::createPacket((int) p);
 		if (pack != NULL)
 		{
 			m_itCurrentIterator = i;
 			try
 			{
+				for (std::list<IPacketHandler *>::iterator x = m_lstPacketHandlers.begin(); x != m_lstPacketHandlers.end(); ++x)
+				{
+					(*x)->m_packetSource = m_packetSource;
+				}
+
 				if (pack->readPacket(this))
 				{
 					strip = i = m_itCurrentIterator;
-					m_iLastCompletePacket = (int)p;
-				} else break;
+					m_iLastCompletePacket = (int) p;
+				}
+				else
+				{
+					printf("WARNING: Failed to handle packet 0x%02X as %s packet\n", p, m_packetSource == SERVER ? "server" : "client");
+				}
+				
+				for (std::list<IPacketHandler *>::iterator x = m_lstPacketHandlers.begin(); x != m_lstPacketHandlers.end(); ++x)
+				{
+					(*x)->m_packetSource = UNKNOWN;
+				}
 			}
 			catch (PacketIncompleteNotification)
 			{
 				// This packet is incomplete, we'll do it next time.
+				delete pack;
 				break;
 			}
 
@@ -77,7 +107,8 @@ void PacketParser::parseInput(const char *pData, size_t iSize)
 			throw ex;
 		}
 
-		if (i == m_strBuffer.end()) break;
+		if (i == m_strBuffer.end())
+			break;
 	}
 
 	if (strip != m_strBuffer.begin())

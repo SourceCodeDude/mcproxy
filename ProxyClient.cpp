@@ -6,10 +6,14 @@ ProxyClient::ProxyClient(ISocketHandler &h)
 	: VanillaClient(h), m_iPort(-1)
 {
 	((ProxyHandler &)h).notifyProxyClient(this);
+
+	m_pPacketParser = new PacketParser(CLIENT);
+	m_pPacketParser->registerPacketHandler(this);
 }
 
 ProxyClient::~ProxyClient()
 {
+	delete m_pPacketParser;
 }
 
 void ProxyClient::setServer(const std::string &strHostname, int iPort)
@@ -30,6 +34,16 @@ int ProxyClient::getServerPort()
 
 void ProxyClient::onProxyData(const char *pData, size_t iSize)
 {
+	try
+	{
+		m_pPacketParser->parseInput(pData, iSize);
+	}
+	catch (PacketParser::Exception ex)
+	{
+		printf("clientprotocol PacketParser::Exception (packet id 0x%02X, last ok 0x%02X)\n", ex.m_iPacketId, ex.m_iLastCompletePacket);
+		getchar();
+	}
+
 	SendBuf(pData, iSize);
 }
 

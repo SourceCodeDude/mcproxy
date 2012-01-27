@@ -70,6 +70,12 @@ public:
 	void onWindowItems(unsigned char ucWindow, short iCount);
 	void onWindowProperty(unsigned char ucWindow, short iProperty, short iValue);
 	void onWindowSlot(unsigned char ucWindow, short iSlot, short iItem, unsigned char ucQty, short iUses);
+	void onWindowClick(unsigned char ucWindow, short iSlot, bool bRightClick, short iAction, bool bShift);
+	void onEnchantItem(unsigned char ucWindow, unsigned char ucEnchantment);
+	void onPlayer(bool bOnGround);
+	void onServerListPing();
+	void onPlayerPosition(double dX, double dY, double dStance, double dZ, bool bGround);
+	void onPlayerLook(float fYaw, float fPitch, bool bOnGround);
 
 private:
 	PacketParser *m_pPacketParser;

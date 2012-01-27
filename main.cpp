@@ -84,7 +84,7 @@ public:
 private:
 	void onChat(const std::wstring &wstrMessage)
 	{
-		wprintf(L"[CHAT] %s\n", wstrMessage.c_str());
+		wprintf(L"[CHAT-%d] %s\n", getPacketSource(), wstrMessage.c_str());
 	}
 };
 

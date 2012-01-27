@@ -4,9 +4,12 @@ class IPacketHandler;
 #define _IPACKETHANDLER_H
 
 #include <string>
+#include "PacketSource.h"
 
 class IPacketHandler
 {
+	friend class PacketParser; // so it can set our packet source
+
 public:
 	virtual ~IPacketHandler() { }
 
@@ -46,7 +49,7 @@ public:
 	virtual void onNewInvalidState(unsigned char ucReason, unsigned char ucGamemode) { }
 	virtual void onOpenWindow(unsigned char ucWindow, unsigned char ucType, const std::wstring &wstrTitle, unsigned char ucNumSlots) { }
 	virtual void onPacket01(int iEntity, const std::wstring &wstrUnused, __int64 iSeed, const std::wstring &wstrLevelType, int iMode, unsigned char ucDimension, unsigned char ucDifficulty, unsigned char ucHeight, unsigned char ucMaxPlayers) { }
-	virtual void onHandshake(const std::wstring &wstrHash) { }
+	virtual void onHandshake(const std::wstring &wstrHashOrUsername) { }
 	virtual void onPainting(int iEntity, const std::wstring &wstrTitle, int iX, int iY, int iZ, int iDirection) { }
 	virtual void onPickupSpawn(int iEntity, short iItem, unsigned char ucCount, short iDamage, int iX, int iY, int iZ, char cRot, char cPitch, char cRoll) { }
 	virtual void onKeepAlive(int iRandom) { }
@@ -69,6 +72,20 @@ public:
 	virtual void onWindowItems(unsigned char ucWindow, short iCount) { }
 	virtual void onWindowProperty(unsigned char ucWindow, short iProperty, short iValue) { }
 	virtual void onWindowSlot(unsigned char ucWindow, short iSlot, short iItem, unsigned char ucQty, short iUses) { }
+	virtual void onWindowClick(unsigned char ucWindow, short iSlot, bool bRightClick, short iAction, bool bShift) { }
+	virtual void onEnchantItem(unsigned char ucWindow, unsigned char ucEnchantment) { }
+	virtual void onPlayer(bool bOnGround) { }
+	virtual void onServerListPing() { }
+	virtual void onPlayerPosition(double dX, double dY, double dStance, double dZ, bool bGround) { }
+	virtual void onPlayerLook(float fYaw, float fPitch, bool bOnGround) { }
+
+protected:
+	ePacketSource getPacketSource();
+	bool isServerPacket();
+	bool isClientPacket();
+
+private:
+	ePacketSource m_packetSource;
 };
 
 #endif

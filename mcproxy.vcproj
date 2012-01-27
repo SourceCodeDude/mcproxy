@@ -246,6 +246,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\packets\EnchantItem.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\packets\EnchantItem.h"
+				>
+			</File>
+			<File
 				RelativePath=".\packets\Entity.cpp"
 				>
 			</File>
@@ -486,6 +494,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\packets\Player.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\packets\Player.h"
+				>
+			</File>
+			<File
 				RelativePath=".\packets\PlayerBlockPlacement.cpp"
 				>
 			</File>
@@ -507,6 +523,22 @@
 			</File>
 			<File
 				RelativePath=".\packets\PlayerListItem.h"
+				>
+			</File>
+			<File
+				RelativePath=".\packets\PlayerLook.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\packets\PlayerLook.h"
+				>
+			</File>
+			<File
+				RelativePath=".\packets\PlayerPosition.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\packets\PlayerPosition.h"
 				>
 			</File>
 			<File
@@ -547,6 +579,14 @@
 			</File>
 			<File
 				RelativePath=".\packets\Respawn.h"
+				>
+			</File>
+			<File
+				RelativePath=".\packets\ServerListPing.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\packets\ServerListPing.h"
 				>
 			</File>
 			<File
@@ -611,6 +651,14 @@
 			</File>
 			<File
 				RelativePath=".\packets\UseEntity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\packets\WindowClick.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\packets\WindowClick.h"
 				>
 			</File>
 			<File
@@ -683,6 +731,10 @@
 			>
 		</File>
 		<File
+			RelativePath=".\IPacketHandler.cpp"
+			>
+		</File>
+		<File
 			RelativePath=".\IPacketHandler.h"
 			>
 		</File>
@@ -724,6 +776,10 @@
 		</File>
 		<File
 			RelativePath=".\Packets.h"
+			>
+		</File>
+		<File
+			RelativePath=".\PacketSource.h"
 			>
 		</File>
 		<File
