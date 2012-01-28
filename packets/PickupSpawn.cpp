@@ -18,7 +18,18 @@ bool PickupSpawn::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool PickupSpawn::writePacket()
+bool PickupSpawn::writePacket(PacketWriter *pWriter, int iEntity, short iItem, unsigned char ucCount, short iDamage, int iX, int iY, int iZ, char cRot, char cPitch, char cRoll)
 {
-	return false;
+	pWriter->addByte(0x15);
+	pWriter->addInt(iEntity);
+	pWriter->addShort(iItem);
+	pWriter->addByte(ucCount);
+	pWriter->addShort(iDamage);
+	pWriter->addInt(iX);
+	pWriter->addInt(iY);
+	pWriter->addInt(iZ);
+	pWriter->addByte(cRot);
+	pWriter->addByte(cPitch);
+	pWriter->addByte(cRoll);
+	return true;
 }

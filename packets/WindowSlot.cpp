@@ -32,7 +32,7 @@ bool WindowSlot::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool WindowSlot::writePacket()
+bool WindowSlot::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

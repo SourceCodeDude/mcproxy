@@ -9,7 +9,9 @@ bool HoldingChange::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool HoldingChange::writePacket()
+bool HoldingChange::writePacket(PacketWriter *pWriter, int iSlot)
 {
-	return false;
+	pWriter->addByte(0x10);
+	pWriter->addShort(iSlot);
+	return true;
 }

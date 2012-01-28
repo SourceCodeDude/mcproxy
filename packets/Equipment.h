@@ -10,7 +10,7 @@ class Equipment : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity, short iSlot, short iItem, short iDamage);
 };
 
 REGISTER_PACKET(Equipment);

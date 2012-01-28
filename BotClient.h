@@ -15,12 +15,13 @@ public:
 	void setAuthentication(Authentication *pAuth);
 
 protected:
-	void OnConnect();
-
+	virtual void onConnected() { }
 	void onHandshake(const std::wstring &wstrHash);
 	void onKeepAlive(int iRandom);
 
 private:
+	void OnConnect();
+
 	std::string m_strName;
 
 	Authentication *m_pAuth;

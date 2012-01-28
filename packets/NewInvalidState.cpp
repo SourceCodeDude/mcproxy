@@ -10,7 +10,10 @@ bool NewInvalidState::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool NewInvalidState::writePacket()
+bool NewInvalidState::writePacket(PacketWriter *pWriter, unsigned char ucReason, unsigned char ucGamemode)
 {
-	return false;
+	pWriter->addByte(0x46);
+	pWriter->addByte(ucReason);
+	pWriter->addByte(ucGamemode);
+	return true;
 }

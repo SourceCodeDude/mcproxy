@@ -24,7 +24,7 @@ bool MultiBlockChange::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool MultiBlockChange::writePacket()
+bool MultiBlockChange::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

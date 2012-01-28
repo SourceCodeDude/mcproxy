@@ -10,7 +10,10 @@ bool Animation::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Animation::writePacket()
+bool Animation::writePacket(PacketWriter *pWriter, int iEntity, unsigned char ucAnimation)
 {
-	return false;
+	pWriter->addByte(0x12);
+	pWriter->addInt(iEntity);
+	pWriter->addByte(ucAnimation);
+	return true;
 }

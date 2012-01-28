@@ -9,7 +9,7 @@ bool WindowClose::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool WindowClose::writePacket()
+bool WindowClose::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

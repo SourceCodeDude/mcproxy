@@ -9,7 +9,9 @@ bool Entity::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Entity::writePacket()
+bool Entity::writePacket(PacketWriter *pWriter, int iEntity)
 {
-	return false;
+	pWriter->addByte(0x1E);
+	pWriter->addInt(iEntity);
+	return true;
 }

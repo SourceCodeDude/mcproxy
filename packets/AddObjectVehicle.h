@@ -10,7 +10,7 @@ class AddObjectVehicle : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity, unsigned char ucType, int iX, int iY, int iZ, int iUnk1, short unk2, short unk3, short unk4);
 };
 
 REGISTER_PACKET(AddObjectVehicle);

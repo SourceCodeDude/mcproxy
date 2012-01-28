@@ -13,7 +13,7 @@ bool SoundEffect::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool SoundEffect::writePacket()
+bool SoundEffect::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

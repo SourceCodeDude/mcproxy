@@ -15,7 +15,7 @@ bool UpdateSign::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool UpdateSign::writePacket()
+bool UpdateSign::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

@@ -22,15 +22,16 @@ public:
 	{
 		if (m_bHasPosition)
 		{
-			sendf(34, "cddddc", 0x0B, (double)m_fX, (double)m_fY, (double)m_fY + 1.62, (double)m_fZ, 1);
+			PacketWriter w;
+			PlayerPosition update;
+			update.writePacket(&w, (double)m_fX, (double)m_fY, (double)m_fY + 1.62, (double)m_fZ, true);
+			w.send(this);
 		}
 	}
 
 private:
-	void OnConnect()
+	void onConnected()
 	{
-		BotClient::OnConnect();
-
 		printf("we're connected\n");
 	}
 
@@ -42,14 +43,16 @@ private:
 	void onChat(const std::wstring &wstrMessage)
 	{
 		wprintf(L"[CHAT] %s\n", wstrMessage.c_str());
+
+		/*PacketWriter w;
+		Chat packet;
+		packet.writePacket(&w, L"hello there");
+		w.send(this);*/
 	}
 
 	void onSpawnPosition(int iX, int iY, int iZ)
 	{
 		printf("got spawn position (%.2f, %.2f, %.2f)\n", m_fX, m_fY, m_fZ);
-
-		//std::string msg("/msg FlakeyGuy i am bot");
-		//sendf(3 + (msg.length() * 2), "ct", 0x03, msg.c_str());
 	}
 
 	void onHealthUpdate(short iHealth, short iFood, float fSaturation)
@@ -59,13 +62,16 @@ private:
 		{
 			printf("Dead, respawning.\n");
 
-			sendf(16, "ccccslt", 0x09, 0, 1, 0, 128, 0LL, "");
+			PacketWriter w;
+			Respawn respawn;
+			respawn.writePacket(&w, 0, 1, 0, 128, 0LL, L"");
+			w.send(this);
 		}
 	}
 
 	void onPlayerPositionLook(double dX, double dStance, double dY, double dZ, float fYaw, float fPitch, bool bGround)
 	{
-		printf("got 0x0D, %.2f/%.2f/%.2f, %d\n", (float)dX, (float)dY, (float)dZ, bGround ? 1 : 0);
+		printf("got 0x0D, %.2f/%.2f/%.2f, %d\n", (float) dX, (float) dY, (float) dZ, bGround ? 1 : 0);
 		m_bHasPosition = true;
 		m_fX = (float) dX;
 		m_fY = (float) dY;
@@ -134,8 +140,8 @@ int main(int argc, char *argv[])
 
 	SocketHandler h;
 
-	//StdoutLog log(LOG_LEVEL_INFO);
-	//h.RegStdLog(&log);
+	StdoutLog log(LOG_LEVEL_INFO);
+	h.RegStdLog(&log);
 
 	/*ProxyHandler h;
 	ListenSocket<ProxySocket> l(h);
@@ -154,17 +160,17 @@ int main(int argc, char *argv[])
 	}
 	while (true);*/
 
-Authentication auth;
-printf("login ret %d\n", auth.login("maveok", "no"));
-printf("user: '%s'\n", auth.getUsername().c_str());
-printf("sess: '%s'\n", auth.getSessionId().c_str());
+	Authentication auth;
+	printf("login ret %d\n", auth.login("maveok", "no"));
+	printf("user: '%s'\n", auth.getUsername().c_str());
+	printf("sess: '%s'\n", auth.getSessionId().c_str());
 
 	MyBot *b = new MyBot(h);
 
 	b->setAuthentication(&auth);
 
 	b->SetDeleteByHandler();
-	b->Open("evocraft.net", 25565);
+	b->Open("x.mavedev.com", 25565);
 	h.Add(b);
 
 	clock_t nextTick = clock();

@@ -20,6 +20,8 @@ void BotClient::setAuthentication(Authentication *pAuth)
 
 void BotClient::OnConnect()
 {
+	onConnected();
+
 	// send 0x02 handshake packet
 	printf("sent handshake\n");
 	sendf(3 + (2 * m_strName.length()), "ct", 0x02, m_strName.c_str());

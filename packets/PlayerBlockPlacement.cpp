@@ -34,7 +34,7 @@ bool PlayerBlockPlacement::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool PlayerBlockPlacement::writePacket()
+bool PlayerBlockPlacement::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

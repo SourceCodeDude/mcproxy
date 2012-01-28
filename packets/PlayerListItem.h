@@ -10,7 +10,7 @@ class PlayerListItem : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, std::wstring wstrName, bool bOnline, short iPing);
 };
 
 REGISTER_PACKET(PlayerListItem);

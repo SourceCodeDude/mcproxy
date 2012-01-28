@@ -10,7 +10,7 @@ class EntityLook : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity, char cYaw, char cPitch);
 };
 
 REGISTER_PACKET(EntityLook);

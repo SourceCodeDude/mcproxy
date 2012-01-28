@@ -10,7 +10,10 @@ bool AttachEntity::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool AttachEntity::writePacket()
+bool AttachEntity::writePacket(PacketWriter *pWriter, int iEntity, int iVehicle)
 {
-	return false;
+	pWriter->addByte(0x27);
+	pWriter->addInt(iEntity);
+	pWriter->addInt(iVehicle);
+	return true;
 }

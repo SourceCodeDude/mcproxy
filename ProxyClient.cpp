@@ -32,6 +32,11 @@ int ProxyClient::getServerPort()
 	return m_iPort;
 }
 
+ProxySocket *ProxyClient::getProxySocket()
+{
+	return ((ProxyHandler &)Handler()).getSocket();
+}
+
 void ProxyClient::onProxyData(const char *pData, size_t iSize)
 {
 	try
@@ -49,7 +54,7 @@ void ProxyClient::onProxyData(const char *pData, size_t iSize)
 
 void ProxyClient::onData(const char *pData, size_t iSize)
 {
-	ProxySocket *pSocket = ((ProxyHandler &)Handler()).getSocket();
+	ProxySocket *pSocket = getProxySocket();
 	if (pSocket != NULL && pSocket->Ready())
 	{
 		pSocket->SendBuf(pData, iSize);

@@ -13,7 +13,13 @@ bool ExperienceOrb::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool ExperienceOrb::writePacket()
+bool ExperienceOrb::writePacket(PacketWriter *pWriter, int iEntity, int iX, int iY, int iZ, short iCount)
 {
-	return false;
+	pWriter->addByte(0x1A);
+	pWriter->addInt(iEntity);
+	pWriter->addInt(iX);
+	pWriter->addInt(iY);
+	pWriter->addInt(iZ);
+	pWriter->addShort(iCount);
+	return true;
 }

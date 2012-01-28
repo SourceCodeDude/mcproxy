@@ -10,7 +10,7 @@ class Kick : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, std::wstring wstrMessage);
 };
 
 REGISTER_PACKET(Kick);

@@ -10,7 +10,10 @@ bool RemoveEntityEffect::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool RemoveEntityEffect::writePacket()
+bool RemoveEntityEffect::writePacket(PacketWriter *pWriter, int iEntity, unsigned char ucEffect)
 {
-	return false;
+	pWriter->addByte(0x2A);
+	pWriter->addByte(iEntity);
+	pWriter->addByte(ucEffect);
+	return true;
 }

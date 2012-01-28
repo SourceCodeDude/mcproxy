@@ -9,7 +9,7 @@ bool TimeUpdate::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool TimeUpdate::writePacket()
+bool TimeUpdate::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

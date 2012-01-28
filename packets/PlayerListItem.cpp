@@ -11,7 +11,11 @@ bool PlayerListItem::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool PlayerListItem::writePacket()
+bool PlayerListItem::writePacket(PacketWriter *pWriter, std::wstring wstrName, bool bOnline, short iPing)
 {
-	return false;
+	pWriter->addByte(0xC9);
+	pWriter->addString(wstrName);
+	pWriter->addBool(bOnline);
+	pWriter->addShort(iPing);
+	return true;
 }

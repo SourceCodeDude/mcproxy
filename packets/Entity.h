@@ -10,7 +10,7 @@ class Entity : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity);
 };
 
 REGISTER_PACKET(Entity);

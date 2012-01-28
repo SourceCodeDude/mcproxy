@@ -15,7 +15,7 @@ bool ItemData::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool ItemData::writePacket()
+bool ItemData::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

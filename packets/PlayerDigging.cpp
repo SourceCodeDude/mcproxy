@@ -13,7 +13,13 @@ bool PlayerDigging::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool PlayerDigging::writePacket()
+bool PlayerDigging::writePacket(PacketWriter *pWriter, unsigned char ucStatus, int iX, char cY, int iZ, unsigned char ucFace)
 {
-	return false;
+	pWriter->addByte(0x0E);
+	pWriter->addByte(ucStatus);
+	pWriter->addInt(iX);
+	pWriter->addByte(cY);
+	pWriter->addInt(iZ);
+	pWriter->addByte(ucFace);
+	return true;
 }

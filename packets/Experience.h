@@ -10,7 +10,7 @@ class Experience : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, float fBar, short iLevel, short iTotal);
 };
 
 REGISTER_PACKET(Experience);

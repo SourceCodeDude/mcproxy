@@ -10,7 +10,7 @@ class PreChunk : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iX, int iZ, bool bInit);
 };
 
 REGISTER_PACKET(PreChunk);

@@ -9,7 +9,9 @@ bool Ping::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Ping::writePacket()
+bool Ping::writePacket(PacketWriter *pWriter, int iRandom)
 {
-	return false;
+	pWriter->addByte(0x00);
+	pWriter->addInt(iRandom);
+	return true;
 }

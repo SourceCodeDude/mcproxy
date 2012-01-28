@@ -10,7 +10,7 @@ class BlockChange : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iX, char cY, int iZ, unsigned char ucType, unsigned char ucMeta);
 };
 
 REGISTER_PACKET(BlockChange);

@@ -16,7 +16,7 @@ bool MobSpawn::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool MobSpawn::writePacket()
+bool MobSpawn::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

@@ -11,7 +11,11 @@ bool Experience::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Experience::writePacket()
+bool Experience::writePacket(PacketWriter *pWriter, float fBar, short iLevel, short iTotal)
 {
-	return false;
+	pWriter->addByte(0x2B);
+	pWriter->addFloat(fBar);
+	pWriter->addShort(iLevel);
+	pWriter->addShort(iTotal);
+	return true;
 }

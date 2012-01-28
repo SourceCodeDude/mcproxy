@@ -10,7 +10,7 @@ class BlockAction : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iX, short iY, int iZ, unsigned char ucType, unsigned char ucPitch);
 };
 
 REGISTER_PACKET(BlockAction);

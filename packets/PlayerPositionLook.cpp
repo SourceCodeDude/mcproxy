@@ -26,7 +26,7 @@ bool PlayerPositionLook::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool PlayerPositionLook::writePacket()
+bool PlayerPositionLook::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

@@ -13,7 +13,7 @@ bool UseBed::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool UseBed::writePacket()
+bool UseBed::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

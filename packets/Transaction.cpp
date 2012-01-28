@@ -11,7 +11,7 @@ bool Transaction::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Transaction::writePacket()
+bool Transaction::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

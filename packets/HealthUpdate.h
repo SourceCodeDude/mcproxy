@@ -10,7 +10,7 @@ class HealthUpdate : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, short iHealth, short iFood, float fSaturation);
 };
 
 REGISTER_PACKET(HealthUpdate);

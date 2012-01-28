@@ -10,7 +10,7 @@ class PlayerDigging : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, unsigned char ucStatus, int iX, char cY, int iZ, unsigned char ucFace);
 };
 
 REGISTER_PACKET(PlayerDigging);

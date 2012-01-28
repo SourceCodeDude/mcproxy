@@ -11,7 +11,11 @@ bool EntityLook::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool EntityLook::writePacket()
+bool EntityLook::writePacket(PacketWriter *pWriter, int iEntity, char cYaw, char cPitch)
 {
-	return false;
+	pWriter->addByte(0x20);
+	pWriter->addInt(iEntity);
+	pWriter->addByte(cYaw);
+	pWriter->addByte(cPitch);
+	return true;
 }

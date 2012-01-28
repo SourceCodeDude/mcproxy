@@ -11,7 +11,11 @@ bool HealthUpdate::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool HealthUpdate::writePacket()
+bool HealthUpdate::writePacket(PacketWriter *pWriter, short iHealth, short iFood, float fSaturation)
 {
-	return false;
+	pWriter->addByte(0x08);
+	pWriter->addShort(iHealth);
+	pWriter->addShort(iFood);
+	pWriter->addFloat(fSaturation);
+	return true;
 }

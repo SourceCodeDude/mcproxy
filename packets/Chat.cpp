@@ -9,7 +9,9 @@ bool Chat::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Chat::writePacket()
+bool Chat::writePacket(PacketWriter *pWriter, std::wstring wstrMessage)
 {
-	return false;
+	pWriter->addByte(0x03);
+	pWriter->addString(wstrMessage);
+	return true;
 }

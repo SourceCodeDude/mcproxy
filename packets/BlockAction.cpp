@@ -13,7 +13,13 @@ bool BlockAction::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool BlockAction::writePacket()
+bool BlockAction::writePacket(PacketWriter *pWriter, int iX, short iY, int iZ, unsigned char ucType, unsigned char ucPitch)
 {
-	return false;
+	pWriter->addByte(0x36);
+	pWriter->addInt(iX);
+	pWriter->addShort(iY);
+	pWriter->addInt(iZ);
+	pWriter->addByte(ucType);
+	pWriter->addByte(ucPitch);
+	return true;
 }

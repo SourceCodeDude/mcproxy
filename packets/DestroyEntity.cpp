@@ -9,7 +9,9 @@ bool DestroyEntity::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool DestroyEntity::writePacket()
+bool DestroyEntity::writePacket(PacketWriter *pWriter, int iEntity)
 {
-	return false;
+	pWriter->addInt(0x1D);
+	pWriter->addInt(iEntity);
+	return true;
 }

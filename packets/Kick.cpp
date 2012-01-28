@@ -9,7 +9,9 @@ bool Kick::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Kick::writePacket()
+bool Kick::writePacket(PacketWriter *pWriter, std::wstring wstrMessage)
 {
-	return false;
+	pWriter->addByte(0xFF);
+	pWriter->addString(wstrMessage);
+	return true;
 }

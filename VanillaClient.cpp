@@ -86,7 +86,6 @@ int VanillaClient::sendf(int bytes, const char *szFormat, ...)
 				--len; // strip 0x0000
 				for (size_t k = 0; k < len; ++k)
 				{
-					//wbuf[k] = (wchar_t)ShortSwap((short)tmp[k]);
 					wbuf[k] = (wchar_t)htons((short)tmp[k]);
 				}
 				delete[] tmp;

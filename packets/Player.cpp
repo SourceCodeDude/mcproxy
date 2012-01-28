@@ -9,7 +9,9 @@ bool Player::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Player::writePacket()
+bool Player::writePacket(PacketWriter *pWriter, bool bOnGround)
 {
-	return false;
+	pWriter->addByte(0x0A);
+	pWriter->addBool(bOnGround);
+	return true;
 }

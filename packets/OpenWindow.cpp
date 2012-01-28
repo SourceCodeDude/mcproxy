@@ -12,7 +12,12 @@ bool OpenWindow::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool OpenWindow::writePacket()
+bool OpenWindow::writePacket(PacketWriter *pWriter, unsigned char ucWindow, unsigned char ucType, std::wstring wstrTitle, unsigned char ucNumSlots)
 {
-	return false;
+	pWriter->addByte(0x64);
+	pWriter->addByte(ucWindow);
+	pWriter->addByte(ucType);
+	pWriter->addString(wstrTitle);
+	pWriter->addByte(ucNumSlots);
+	return true;
 }

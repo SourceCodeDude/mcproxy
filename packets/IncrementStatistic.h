@@ -10,7 +10,7 @@ class IncrementStatistic : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iStatistic, unsigned char ucAmount);
 };
 
 REGISTER_PACKET(IncrementStatistic);

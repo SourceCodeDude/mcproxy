@@ -10,7 +10,7 @@ class PlayerPosition : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, double dX, double dY, double dStance, double dZ, bool bGround);
 };
 
 REGISTER_PACKET(PlayerPosition);

@@ -12,7 +12,7 @@ bool EntityMetadata::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool EntityMetadata::writePacket()
+bool EntityMetadata::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

@@ -16,7 +16,15 @@ bool NamedEntitySpawn::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool NamedEntitySpawn::writePacket()
+bool NamedEntitySpawn::writePacket(PacketWriter *pWriter, int iEntity, std::wstring wstrName, int iX, int iY, int iZ, char cRot, char cPitch, short iItem)
 {
-	return false;
+	pWriter->addByte(0x14);
+	pWriter->addInt(iEntity);
+	pWriter->addInt(iX);
+	pWriter->addInt(iY);
+	pWriter->addInt(iZ);
+	pWriter->addByte(cRot);
+	pWriter->addByte(cPitch);
+	pWriter->addShort(iItem);
+	return true;
 }

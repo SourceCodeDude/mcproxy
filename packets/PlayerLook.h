@@ -10,7 +10,7 @@ class PlayerLook : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, float fYaw, float fPitch, bool bGround);
 };
 
 REGISTER_PACKET(PlayerLook);

@@ -33,7 +33,7 @@ bool CreativeInventoryAction::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool CreativeInventoryAction::writePacket()
+bool CreativeInventoryAction::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

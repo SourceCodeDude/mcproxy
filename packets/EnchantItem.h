@@ -10,7 +10,7 @@ class EnchantItem : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, unsigned char ucWindow, unsigned char ucEnchantment);
 };
 
 REGISTER_PACKET(EnchantItem);

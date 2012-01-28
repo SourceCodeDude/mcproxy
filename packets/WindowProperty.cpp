@@ -11,7 +11,7 @@ bool WindowProperty::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool WindowProperty::writePacket()
+bool WindowProperty::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

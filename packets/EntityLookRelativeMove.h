@@ -10,7 +10,7 @@ class EntityLookRelativeMove : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity, char cX, char cY, char cZ, char cYaw, char cPitch);
 };
 
 REGISTER_PACKET(EntityLookRelativeMove);

@@ -11,7 +11,11 @@ bool PlayerLook::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool PlayerLook::writePacket()
+bool PlayerLook::writePacket(PacketWriter *pWriter, float fYaw, float fPitch, bool bGround)
 {
-	return false;
+	pWriter->addByte(0x0C);
+	pWriter->addFloat(fYaw);
+	pWriter->addFloat(fPitch);
+	pWriter->addBool(bGround);
+	return true;
 }

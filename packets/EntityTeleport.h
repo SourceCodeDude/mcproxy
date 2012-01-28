@@ -10,7 +10,7 @@ class EntityTeleport : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity, int iX, int iY, int iZ, char cYaw, char cPitch);
 };
 
 REGISTER_PACKET(EntityTeleport);

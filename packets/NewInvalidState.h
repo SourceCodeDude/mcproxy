@@ -10,7 +10,7 @@ class NewInvalidState : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, unsigned char ucReason, unsigned char ucGamemode);
 };
 
 REGISTER_PACKET(NewInvalidState);

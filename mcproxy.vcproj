@@ -795,6 +795,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\PacketWriter.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\PacketWriter.h"
+			>
+		</File>
+		<File
 			RelativePath=".\ProxyClient.cpp"
 			>
 		</File>

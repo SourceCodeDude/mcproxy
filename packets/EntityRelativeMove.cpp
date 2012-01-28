@@ -12,7 +12,12 @@ bool EntityRelativeMove::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool EntityRelativeMove::writePacket()
+bool EntityRelativeMove::writePacket(PacketWriter *pWriter, int iEntity, char cX, char cY, char cZ)
 {
-	return false;
+	pWriter->addByte(0x1F);
+	pWriter->addInt(iEntity);
+	pWriter->addByte(cX);
+	pWriter->addByte(cY);
+	pWriter->addByte(cZ);
+	return true;
 }

@@ -10,7 +10,7 @@ class EntityVelocity : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity, short iVelX, short iVelY, short iVelZ);
 };
 
 REGISTER_PACKET(EntityVelocity);

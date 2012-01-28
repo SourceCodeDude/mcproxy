@@ -35,7 +35,7 @@ bool Packet01::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Packet01::writePacket()
+bool Packet01::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

@@ -12,7 +12,12 @@ bool EntityVelocity::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool EntityVelocity::writePacket()
+bool EntityVelocity::writePacket(PacketWriter *pWriter, int iEntity, short iVelX, short iVelY, short iVelZ)
 {
-	return false;
+	pWriter->addByte(0x1C);
+	pWriter->addInt(iEntity);
+	pWriter->addShort(iVelX);
+	pWriter->addShort(iVelY);
+	pWriter->addShort(iVelZ);
+	return true;
 }

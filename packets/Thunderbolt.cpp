@@ -13,7 +13,7 @@ bool Thunderbolt::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Thunderbolt::writePacket()
+bool Thunderbolt::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

@@ -10,7 +10,7 @@ class Ping : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iRandom);
 };
 
 REGISTER_PACKET(Ping);

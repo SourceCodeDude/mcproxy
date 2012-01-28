@@ -10,7 +10,7 @@ class CollectItem : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iCollected, int iCollector);
 };
 
 REGISTER_PACKET(CollectItem);

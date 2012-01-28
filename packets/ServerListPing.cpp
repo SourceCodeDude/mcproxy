@@ -7,7 +7,8 @@ bool ServerListPing::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool ServerListPing::writePacket()
+bool ServerListPing::writePacket(PacketWriter *pWriter)
 {
-	return false;
+	pWriter->addByte(0xFE);
+	return true;
 }

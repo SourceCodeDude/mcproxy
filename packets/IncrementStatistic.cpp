@@ -10,7 +10,10 @@ bool IncrementStatistic::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool IncrementStatistic::writePacket()
+bool IncrementStatistic::writePacket(PacketWriter *pWriter, int iStatistic, unsigned char ucAmount)
 {
-	return false;
+	pWriter->addByte(0xC8);
+	pWriter->addInt(iStatistic);
+	pWriter->addByte(ucAmount);
+	return true;
 }

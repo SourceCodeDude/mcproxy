@@ -11,7 +11,11 @@ bool PreChunk::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool PreChunk::writePacket()
+bool PreChunk::writePacket(PacketWriter *pWriter, int iX, int iZ, bool bInit)
 {
-	return false;
+	pWriter->addByte(0x32);
+	pWriter->addInt(iX);
+	pWriter->addInt(iZ);
+	pWriter->addBool(bInit);
+	return true;
 }

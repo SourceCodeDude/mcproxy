@@ -12,7 +12,12 @@ bool EntityEffect::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool EntityEffect::writePacket()
+bool EntityEffect::writePacket(PacketWriter *pWriter, int iEntity, unsigned char ucEffect, unsigned char ucAmplifier, short iDuration)
 {
-	return false;
+	pWriter->addByte(0x29);
+	pWriter->addInt(iEntity);
+	pWriter->addByte(ucEffect);
+	pWriter->addByte(ucAmplifier);
+	pWriter->addShort(iDuration);
+	return true;
 }

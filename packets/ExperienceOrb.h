@@ -10,7 +10,7 @@ class ExperienceOrb : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity, int iX, int iY, int iZ, short iCount);
 };
 
 REGISTER_PACKET(ExperienceOrb);

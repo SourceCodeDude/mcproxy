@@ -10,7 +10,7 @@ class EntityEffect : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity, unsigned char ucEffect, unsigned char ucAmplifier, short iDuration);
 };
 
 REGISTER_PACKET(EntityEffect);

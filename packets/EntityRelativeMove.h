@@ -10,7 +10,7 @@ class EntityRelativeMove : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity, char cX, char cY, char cZ);
 };
 
 REGISTER_PACKET(EntityRelativeMove);

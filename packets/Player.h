@@ -10,7 +10,7 @@ class Player : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, bool bOnGround);
 };
 
 REGISTER_PACKET(Player);

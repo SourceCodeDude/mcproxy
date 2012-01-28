@@ -10,7 +10,7 @@ class HoldingChange : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iSlot);
 };
 
 REGISTER_PACKET(HoldingChange);

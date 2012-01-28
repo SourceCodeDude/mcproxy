@@ -36,7 +36,7 @@ bool WindowItems::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool WindowItems::writePacket()
+bool WindowItems::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

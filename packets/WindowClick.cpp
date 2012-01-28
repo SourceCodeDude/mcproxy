@@ -36,7 +36,7 @@ bool WindowClick::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool WindowClick::writePacket()
+bool WindowClick::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

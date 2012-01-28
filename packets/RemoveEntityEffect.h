@@ -10,7 +10,7 @@ class RemoveEntityEffect : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity, unsigned char ucEffect);
 };
 
 REGISTER_PACKET(RemoveEntityEffect);

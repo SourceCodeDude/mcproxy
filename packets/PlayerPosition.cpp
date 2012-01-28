@@ -13,7 +13,13 @@ bool PlayerPosition::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool PlayerPosition::writePacket()
+bool PlayerPosition::writePacket(PacketWriter *pWriter, double dX, double dY, double dStance, double dZ, bool bGround)
 {
-	return false;
+	pWriter->addByte(0x0B);
+	pWriter->addDouble(dX);
+	pWriter->addDouble(dY);
+	pWriter->addDouble(dStance);
+	pWriter->addDouble(dZ);
+	pWriter->addBool(bGround);
+	return true;
 }

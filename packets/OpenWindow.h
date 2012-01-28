@@ -10,7 +10,7 @@ class OpenWindow : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, unsigned char ucWindow, unsigned char ucType, std::wstring wstrTitle, unsigned char ucNumSlots);
 };
 
 REGISTER_PACKET(OpenWindow);

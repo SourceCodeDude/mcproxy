@@ -10,7 +10,10 @@ bool EntityAction::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool EntityAction::writePacket()
+bool EntityAction::writePacket(PacketWriter *pWriter, int iEntity, unsigned char ucAction)
 {
-	return false;
+	pWriter->addByte(0x13);
+	pWriter->addInt(iEntity);
+	pWriter->addByte(ucAction);
+	return true;
 }

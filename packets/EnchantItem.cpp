@@ -10,7 +10,10 @@ bool EnchantItem::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool EnchantItem::writePacket()
+bool EnchantItem::writePacket(PacketWriter *pWriter, unsigned char ucWindow, unsigned char ucEnchantment)
 {
-	return false;
+	pWriter->addByte(0x6C);
+	pWriter->addByte(ucWindow);
+	pWriter->addByte(ucEnchantment);
+	return true;
 }

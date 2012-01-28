@@ -14,7 +14,13 @@ bool EntityTeleport::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool EntityTeleport::writePacket()
+bool EntityTeleport::writePacket(PacketWriter *pWriter, int iEntity, int iX, int iY, int iZ, char cYaw, char cPitch)
 {
-	return false;
+	pWriter->addByte(0x22);
+	pWriter->addInt(iX);
+	pWriter->addInt(iY);
+	pWriter->addInt(iZ);
+	pWriter->addByte(cYaw);
+	pWriter->addByte(cPitch);
+	return true;
 }

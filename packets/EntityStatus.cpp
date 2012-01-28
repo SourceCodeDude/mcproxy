@@ -10,7 +10,10 @@ bool EntityStatus::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool EntityStatus::writePacket()
+bool EntityStatus::writePacket(PacketWriter *pWriter, int iEntity, unsigned char ucStatus)
 {
-	return false;
+	pWriter->addByte(0x26);
+	pWriter->addInt(iEntity);
+	pWriter->addByte(ucStatus);
+	return true;
 }

@@ -14,7 +14,14 @@ bool Respawn::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Respawn::writePacket()
+bool Respawn::writePacket(PacketWriter *pWriter, unsigned char ucDimension, unsigned char ucDifficulty, bool bCreative, short iMaxHeight, __int64 iSeed, std::wstring wstrLevelType)
 {
-	return false;
+	pWriter->addByte(0x09);
+	pWriter->addByte(ucDimension);
+	pWriter->addByte(ucDifficulty);
+	pWriter->addBool(bCreative);
+	pWriter->addShort(iMaxHeight);
+	pWriter->addLong(iSeed);
+	pWriter->addString(wstrLevelType);
+	return true;
 }

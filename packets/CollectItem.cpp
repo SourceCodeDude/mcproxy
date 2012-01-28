@@ -10,7 +10,10 @@ bool CollectItem::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool CollectItem::writePacket()
+bool CollectItem::writePacket(PacketWriter *pWriter, int iCollected, int iCollector)
 {
-	return false;
+	pWriter->addByte(0x16);
+	pWriter->addInt(iCollected);
+	pWriter->addInt(iCollector);
+	return true;
 }

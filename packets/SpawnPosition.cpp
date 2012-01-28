@@ -11,7 +11,7 @@ bool SpawnPosition::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool SpawnPosition::writePacket()
+bool SpawnPosition::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

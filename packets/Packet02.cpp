@@ -9,7 +9,9 @@ bool Packet02::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Packet02::writePacket()
+bool Packet02::writePacket(PacketWriter *pWriter, std::wstring wstrHashOrUsername)
 {
-	return false;
+	pWriter->addByte(0x02);
+	pWriter->addString(wstrHashOrUsername);
+	return true;
 }

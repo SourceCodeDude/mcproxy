@@ -4,14 +4,13 @@ class Packet;
 #define _PACKET_H
 
 #include "PacketParser.h"
+#include "PacketWriter.h"
 
 class Packet
 {
 public:
 	virtual ~Packet() { }
 	virtual bool readPacket(PacketParser *pParser) = 0;
-	virtual bool writePacket() = 0;
-	virtual void update() { };
 };
 
 #define REGISTER_PACKET(packet) static Packet *CreatePacket_##packet() \

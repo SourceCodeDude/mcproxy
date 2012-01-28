@@ -10,7 +10,7 @@ class AttachEntity : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter, int iEntity, int iVehicle);
 };
 
 REGISTER_PACKET(AttachEntity);

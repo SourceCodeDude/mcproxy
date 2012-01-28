@@ -17,7 +17,7 @@ bool Explosion::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool Explosion::writePacket()
+bool Explosion::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

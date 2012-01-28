@@ -10,7 +10,7 @@ class CreativeInventoryAction : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket();
+	bool writePacket(PacketWriter *pWriter);
 };
 
 REGISTER_PACKET(CreativeInventoryAction);

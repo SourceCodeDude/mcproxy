@@ -19,6 +19,8 @@ public:
 	std::string getServerHostname();
 	int getServerPort();
 
+	ProxySocket *getProxySocket();
+
 	void onProxyData(const char *pData, size_t iSize);
 
 private:

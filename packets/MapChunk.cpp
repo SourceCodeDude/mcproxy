@@ -42,7 +42,7 @@ bool MapChunk::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool MapChunk::writePacket()
+bool MapChunk::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

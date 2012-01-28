@@ -13,7 +13,13 @@ bool BlockChange::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool BlockChange::writePacket()
+bool BlockChange::writePacket(PacketWriter *pWriter, int iX, char cY, int iZ, unsigned char ucType, unsigned char ucMeta)
 {
-	return false;
+	pWriter->addByte(0x35);
+	pWriter->addInt(iX);
+	pWriter->addByte(cY);
+	pWriter->addInt(iZ);
+	pWriter->addByte(ucType);
+	pWriter->addByte(ucMeta);
+	return true;
 }

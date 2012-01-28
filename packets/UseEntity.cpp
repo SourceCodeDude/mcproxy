@@ -11,7 +11,7 @@ bool UseEntity::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool UseEntity::writePacket()
+bool UseEntity::writePacket(PacketWriter *pWriter)
 {
 	return false;
 }

@@ -25,7 +25,21 @@ bool AddObjectVehicle::readPacket(PacketParser *pParser)
 	return true;
 }
 
-bool AddObjectVehicle::writePacket()
+bool AddObjectVehicle::writePacket(PacketWriter *pWriter, int iEntity, unsigned char ucType, int iX, int iY, int iZ, int iUnk1, short unk2, short unk3, short unk4)
 {
-	return false;
+	pWriter->addByte(0x17);
+	pWriter->addInt(iEntity);
+	pWriter->addByte(ucType);
+	pWriter->addInt(iX);
+	pWriter->addInt(iY);
+	pWriter->addInt(iZ);
+	pWriter->addInt(iUnk1);
+	if (iUnk1 > 0)
+	{
+		pWriter->addShort(unk2);
+		pWriter->addShort(unk3);
+		pWriter->addShort(unk4);
+	}
+
+	return true;
 }
