@@ -15,10 +15,10 @@ public:
 
 	void addBytes(const char *pData, size_t iSize);
 
-	void addByte(unsigned char ucByte);
-	void addShort(short iNum);
-	void addInt(int iNum);
-	void addLong(__int64 iNum);
+	void addByte(uint8_t ucByte);
+	void addShort(int16_t iNum);
+	void addInt(int32_t iNum);
+	void addLong(int64_t iNum);
 	void addString(std::wstring wstrString);
 	void addString(std::string strString);
 	void addFloat(float fNum);

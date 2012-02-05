@@ -1,6 +1,8 @@
 #include "StdInc.h"
 #include "VanillaClient.h"
 #include "Endian.h"
+#include <stdarg.h>
+#include <string.h>
 
 VanillaClient::VanillaClient(ISocketHandler &h)
 	: TcpSocket(h)
@@ -23,53 +25,66 @@ int VanillaClient::sendf(int bytes, const char *szFormat, ...)
 {
 	va_list vaArgs;
 	va_start(vaArgs, szFormat);
-	char *buf = (char *)malloc(bytes);
-	char *buf2 = buf;
-	char c;
-	for (char *i = (char *)szFormat; (c = *i) != '\0'; ++i)
+	uint8_t *buf = (uint8_t *)malloc(bytes);
+	uint8_t *buf2 = buf;
+	
+	uint8_t c;
+	for (uint8_t *i = (uint8_t *)szFormat; (c = *i) != '\0'; ++i)
 	{
 		switch (c)
 		{
 		case 'c':
 			{
-				char val = va_arg(vaArgs, char);
+#ifdef WIN32
+				uint8_t val = va_arg(vaArgs, uint8_t);
+#else
+				uint8_t val = (uint8_t) va_arg(vaArgs, int);
+#endif
 				*buf = val; // *buf++ ??
 				++buf;
 			}
 			break;
 		case 'i':
 			{
-				int val = va_arg(vaArgs, int);
-				*(int *)buf = htonl(val);
-				buf += sizeof(int);
+				int32_t val = va_arg(vaArgs, int32_t);
+				*(int32_t *)buf = htonl(val);
+				buf += 4;
 			}
 			break;
 		case 's':
 			{
-				short val = va_arg(vaArgs, short);
-				*(short *)buf = htons(val);
-				buf += sizeof(short);
+#ifdef WIN32
+				int16_t val = va_arg(vaArgs, int16_t);
+#else
+				int16_t val = (int16_t) va_arg(vaArgs, int);
+#endif
+				*(int16_t *)buf = htons(val);
+				buf += 2;
 			}
 			break;
 		case 'l':
 			{
-				long long val = va_arg(vaArgs, long long);
-				*(long long *)buf = htonll(val);
-				buf += sizeof(long long);
+				int64_t val = va_arg(vaArgs, int64_t);
+				*(int64_t *)buf = htonll(val);
+				buf += 8;
 			}
 			break;
 		case 'd':
 			{
 				double val = va_arg(vaArgs, double);
 				*(double *)buf = Endian::bigDouble(val); // TODO IEEE 754 ??
-				buf += sizeof(double);
+				buf += 8;
 			}
 			break;
 		case 'f':
 			{
+#ifdef WIN32
 				float val = va_arg(vaArgs, float);
+#else
+				float val = (float) va_arg(vaArgs, double);
+#endif
 				*(float *)buf = Endian::bigFloat(val); // TODO IEEE 754 ??
-				buf += sizeof(float);
+				buf += 4;
 			}
 			break;
 		case 't':
@@ -77,19 +92,21 @@ int VanillaClient::sendf(int bytes, const char *szFormat, ...)
 				char *str = va_arg(vaArgs, char *);
 				size_t len = strlen(str);
 
-				*(short *)buf = ntohs(len);
-				buf += sizeof(short);
+				*(int16_t *)buf = htons(len);
+				buf += 2;
 
-				wchar_t *wbuf = (wchar_t *)buf;
 				wchar_t *tmp = new wchar_t[len + 1];
 				mbstowcs_s(&len, tmp, len + 1, str, len);
+#ifdef WIN32
 				--len; // strip 0x0000
+#endif
 				for (size_t k = 0; k < len; ++k)
 				{
-					wbuf[k] = (wchar_t)htons((short)tmp[k]);
+					//wbuf[k] = (int16_t)htons((int16_t) tmp[k]);
+					*(int16_t *)buf = (int16_t)htons((int16_t) tmp[k]);
+					buf += 2;
 				}
 				delete[] tmp;
-				buf += len * sizeof(wchar_t);
 			}
 			break;
 		}
@@ -98,7 +115,8 @@ int VanillaClient::sendf(int bytes, const char *szFormat, ...)
 
 	//assert(buf - buf2 == bytes);
 
-	SendBuf(buf2, bytes, 0);
+	SendBuf((const char *)buf2, bytes, 0);
+	
 	free(buf2);
 
 	return bytes;

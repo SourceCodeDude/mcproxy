@@ -37,12 +37,12 @@ public:
 
 	void parseInput(const char *pData, size_t iSize);
 
-	void getBytes(unsigned char *dest, size_t num);
+	void getBytes(uint8_t *dest, size_t num);
 
-	unsigned char getByte();
-	short getShort();
-	int getInt();
-	__int64 getLong();
+	uint8_t getByte();
+	int16_t getShort();
+	int32_t getInt();
+	int64_t getLong();
 	std::wstring getString();
 	float getFloat();
 	double getDouble();

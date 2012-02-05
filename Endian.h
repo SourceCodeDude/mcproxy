@@ -1,5 +1,7 @@
-#ifndef _ENDIAN_H
-#define _ENDIAN_H
+class Endian;
+
+#ifndef _ENDIANNN_H
+#define _ENDIANNN_H
 
 class Endian
 {

@@ -1,17 +1,20 @@
 #ifndef _STDINC_H
 #define _STDINC_H
 
-#include "misc/stdint.h"
-
 #include <stdio.h>
 
 #ifdef WIN32
 
+#include "misc/stdint.h"
 #ifndef WIN32_LEAN_AND_MEAN
   #define WIN32_LEAN_AND_MEAN
 #endif
 #include <winsock2.h>
 #include <windows.h>
+
+#else
+
+#include "misc/linux.h"
 
 #endif
 

@@ -1,6 +1,15 @@
 #include "StdInc.h"
 #include "Timer.h"
 
+#ifndef WIN32
+#include <time.h>
+// HACK!!!
+DWORD GetTickCount()
+{
+	return (DWORD)(clock() / CLOCKS_PER_SEC * 1000);
+}
+#endif
+
 Timer::Timer()
 {
 }

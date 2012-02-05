@@ -1,6 +1,7 @@
 #include "StdInc.h"
 #include "Packets.h"
 #include "Packet.h"
+#include <string.h>
 
 Packets::pfnPacket_t Packets::m_packetFactory[256];
 

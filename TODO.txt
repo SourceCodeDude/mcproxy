@@ -1,3 +1,1 @@
 - (Proxy) Handle disconnects, reconnects
-- Add ability to send packets with Packet::write(Server/Client)Packet
-- Change int types in code to those from stdint.h (int32_t ...)

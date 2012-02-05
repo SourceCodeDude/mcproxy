@@ -1,6 +1,6 @@
 #include "StdInc.h"
-#include "PacketParser.h"
 #include "Endian.h"
+#include "PacketParser.h"
 #include "Packets.h"
 
 PacketParser::PacketParser(ePacketSource packetSource)
@@ -58,7 +58,7 @@ void PacketParser::parseInput(const char *pData, size_t iSize)
 
 	for (std::string::iterator i = m_strBuffer.begin(); i != m_strBuffer.end();)
 	{
-		unsigned char p = (unsigned char) *i;
+		uint8_t p = (uint8_t) *i;
 		++i; // skip packet id
 
 		Packet *pack = Packets::createPacket((int) p);
@@ -114,7 +114,7 @@ void PacketParser::parseInput(const char *pData, size_t iSize)
 	}
 }
 
-void PacketParser::getBytes(unsigned char *dest, size_t num)
+void PacketParser::getBytes(uint8_t *dest, size_t num)
 {
 	size_t c = 0;
 	for (; c < num && m_itCurrentIterator != m_strBuffer.end(); ++m_itCurrentIterator)
@@ -130,47 +130,49 @@ void PacketParser::getBytes(unsigned char *dest, size_t num)
 	}
 }
 
-unsigned char PacketParser::getByte()
+uint8_t PacketParser::getByte()
 {
-	unsigned char ucByte;
+	uint8_t ucByte;
 	getBytes(&ucByte, 1);
 	return ucByte;
 }
 
-short PacketParser::getShort()
+int16_t PacketParser::getShort()
 {
-	short iShort;
-	getBytes((unsigned char *)&iShort, 2);
+	int16_t iShort;
+	getBytes((uint8_t *)&iShort, 2);
 	return ntohs(iShort);
 }
 
-int PacketParser::getInt()
+int32_t PacketParser::getInt()
 {
-	int iInt;
-	getBytes((unsigned char *)&iInt, 4);
+	int32_t iInt;
+	getBytes((uint8_t *)&iInt, 4);
 	return ntohl(iInt);
 }
 
-__int64 PacketParser::getLong()
+int64_t PacketParser::getLong()
 {
-	__int64 iLong;
-	getBytes((unsigned char *)&iLong, 8);
+	int64_t iLong;
+	getBytes((uint8_t *)&iLong, 8);
 	return ntohll(iLong);
 }
 
 std::wstring PacketParser::getString()
 {
-	short iLength;
-	getBytes((unsigned char *)&iLength, 2);
+	int16_t iLength;
+	getBytes((uint8_t *)&iLength, 2);
 	iLength = ntohs(iLength);
 
 	std::wstring wstrString;
 	wstrString.resize(iLength);
-	getBytes((unsigned char *)wstrString.c_str(), iLength * 2);
+	uint16_t *tmp = new uint16_t[iLength];
+	getBytes((uint8_t *)tmp, iLength * 2);
 
+	size_t k = 0;
 	for (std::wstring::iterator i = wstrString.begin(); i != wstrString.end(); ++i)
 	{
-		*i = ntohs(*i);
+		*i = ntohs(tmp[k++]);
 	}
 	return wstrString;
 }
@@ -178,27 +180,27 @@ std::wstring PacketParser::getString()
 float PacketParser::getFloat()
 {
 	float fFloat;
-	getBytes((unsigned char *)&fFloat, 4);
+	getBytes((uint8_t *)&fFloat, 4);
 	return Endian::bigFloat(fFloat);
 }
 
 double PacketParser::getDouble()
 {
 	double dDouble;
-	getBytes((unsigned char *)&dDouble, 8);
+	getBytes((uint8_t *)&dDouble, 8);
 	return Endian::bigDouble(dDouble);
 }
 
 bool PacketParser::getBool()
 {
-	unsigned char ucByte;
+	uint8_t ucByte;
 	getBytes(&ucByte, 1);
 	return ucByte != 0;
 }
 
 void PacketParser::getMetadata()
 {
-	unsigned char p = getByte();
+	uint8_t p = getByte();
 	while (p != 0x7F)
 	{
 		switch (p >> 5)

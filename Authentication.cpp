@@ -91,7 +91,7 @@ void Authentication::keepAlive()
 	}
 
 	// TODO: urlencode
-	curl_easy_setopt(curl, CURLOPT_URL, "https://login.minecraft.net/session?user=" + m_sUsername + "&session=" + m_sSessionId);
+	curl_easy_setopt(curl, CURLOPT_URL, ("https://login.minecraft.net/session?user=" + m_sUsername + "&session=" + m_sSessionId).c_str());
 
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);

@@ -7,7 +7,7 @@
 #include "Packets.h"
 #include "PacketParser.h"
 #include "BotClient.h"
-#include <windows.h>
+#include "utils/StringConvert.h"
 
 class MyBot : public BotClient
 {
@@ -37,12 +37,12 @@ private:
 
 	void onKick(const std::wstring &wstrMessage)
 	{
-		wprintf(L"[KICK] %s\n", wstrMessage.c_str());
+		printf("[KICK] %s\n", StringConvert::narrow(wstrMessage).c_str());
 	}
 
 	void onChat(const std::wstring &wstrMessage)
-	{
-		wprintf(L"[CHAT] %s\n", wstrMessage.c_str());
+	{		
+		printf("[CHAT] %s\n", StringConvert::narrow(wstrMessage).c_str());
 
 		/*PacketWriter w;
 		Chat packet;
@@ -120,20 +120,19 @@ private:
 
 int main(int argc, char *argv[])
 {
-	assert(sizeof(char) == 1);
-	assert(sizeof(int) == 4);
-	assert(sizeof(short) == 2);
-	assert(sizeof(long long) == 8);
-	assert(sizeof(double) == 8);
+	printf("float size: %d, double size: %d\n", sizeof(float), sizeof(double));
+	
 	assert(sizeof(float) == 4);
-	assert(sizeof(wchar_t) == 2);
+	assert(sizeof(double) == 8);
 
+#ifdef WIN32
 	WSADATA wsa;
 	if (WSAStartup(MAKEWORD(2, 0), &wsa) != 0)
 	{
 		printf("WSAStartup failed\n");
 		return 1;
 	}
+#endif
 
 	Endian::init();
 	Packets::init();

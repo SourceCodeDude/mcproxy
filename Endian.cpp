@@ -1,6 +1,5 @@
 #include "StdInc.h"
 #include "Endian.h"
-#include <stdio.h>
 
 short (* Endian::bigShort) (short s);
 short (* Endian::littleShort) (short s);
