@@ -3,15 +3,15 @@
 
 bool Kick::readPacket(PacketParser *pParser)
 {
-	std::wstring wstrMessage = pParser->getString();
+	std::string strMessage = pParser->getString();
 
-	pParser->getPacketHandlerHelper()->onKick(wstrMessage);
+	pParser->getPacketHandlerHelper()->onKick(strMessage);
 	return true;
 }
 
-bool Kick::writePacket(PacketWriter *pWriter, std::wstring wstrMessage)
+bool Kick::writePacket(PacketWriter *pWriter, std::string strMessage)
 {
 	pWriter->addByte(0xFF);
-	pWriter->addString(wstrMessage);
+	pWriter->addString(strMessage);
 	return true;
 }

@@ -3,13 +3,13 @@
 
 bool PluginMessage::readPacket(PacketParser *pParser)
 {
-	std::wstring wstrChannel = pParser->getString();
+	std::string strChannel = pParser->getString();
 	short iLength = pParser->getShort();
 
 	std::vector<unsigned char> vecData(iLength);
 	pParser->getBytes((unsigned char *)&vecData[0], iLength);
 
-	pParser->getPacketHandlerHelper()->onPluginMessage(wstrChannel, iLength);
+	pParser->getPacketHandlerHelper()->onPluginMessage(strChannel, iLength);
 	return true;
 }
 

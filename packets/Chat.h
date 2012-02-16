@@ -10,7 +10,7 @@ class Chat : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket(PacketWriter *pWriter, std::wstring wstrMessage);
+	bool writePacket(PacketWriter *pWriter, std::string strMessage);
 };
 
 REGISTER_PACKET(Chat);

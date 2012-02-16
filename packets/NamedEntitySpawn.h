@@ -10,7 +10,7 @@ class NamedEntitySpawn : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket(PacketWriter *pWriter, int iEntity, std::wstring wstrName, int iX, int iY, int iZ, char cRot, char cPitch, short iItem);
+	bool writePacket(PacketWriter *pWriter, int iEntity, std::string strName, int iX, int iY, int iZ, char cRot, char cPitch, short iItem);
 };
 
 REGISTER_PACKET(NamedEntitySpawn);

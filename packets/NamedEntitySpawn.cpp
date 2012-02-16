@@ -4,7 +4,7 @@
 bool NamedEntitySpawn::readPacket(PacketParser *pParser)
 {
 	int iEntity = pParser->getInt();
-	std::wstring wstrName = pParser->getString();
+	std::string strName = pParser->getString();
 	int iX = pParser->getInt();
 	int iY = pParser->getInt();
 	int iZ = pParser->getInt();
@@ -12,11 +12,11 @@ bool NamedEntitySpawn::readPacket(PacketParser *pParser)
 	char cPitch = pParser->getByte();
 	short iItem = pParser->getShort();
 	
-	pParser->getPacketHandlerHelper()->onNamedEntitySpawn(iEntity, wstrName, iX, iY, iZ, cRot, cPitch, iItem);
+	pParser->getPacketHandlerHelper()->onNamedEntitySpawn(iEntity, strName, iX, iY, iZ, cRot, cPitch, iItem);
 	return true;
 }
 
-bool NamedEntitySpawn::writePacket(PacketWriter *pWriter, int iEntity, std::wstring wstrName, int iX, int iY, int iZ, char cRot, char cPitch, short iItem)
+bool NamedEntitySpawn::writePacket(PacketWriter *pWriter, int iEntity, std::string strName, int iX, int iY, int iZ, char cRot, char cPitch, short iItem)
 {
 	pWriter->addByte(0x14);
 	pWriter->addInt(iEntity);

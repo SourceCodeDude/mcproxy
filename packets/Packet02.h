@@ -10,7 +10,7 @@ class Packet02 : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket(PacketWriter *pWriter, std::wstring wstrHashOrUsername);
+	bool writePacket(PacketWriter *pWriter, std::string strHashOrUsername);
 };
 
 REGISTER_PACKET(Packet02);

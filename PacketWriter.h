@@ -5,6 +5,7 @@ class PacketWriter;
 
 #include <string>
 #include <TcpSocket.h>
+#include <iconv.h>
 
 class PacketWriter
 {
@@ -19,7 +20,6 @@ public:
 	void addShort(int16_t iNum);
 	void addInt(int32_t iNum);
 	void addLong(int64_t iNum);
-	void addString(std::wstring wstrString);
 	void addString(std::string strString);
 	void addFloat(float fNum);
 	void addDouble(double dNum);
@@ -29,6 +29,8 @@ public:
 
 private:
 	std::string m_strBuffer;
+
+	iconv_t m_iconv;
 };
 
 #endif

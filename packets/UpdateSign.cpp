@@ -6,12 +6,12 @@ bool UpdateSign::readPacket(PacketParser *pParser)
 	int iX = pParser->getInt();
 	short iY = pParser->getShort();
 	int iZ = pParser->getInt();
-	std::wstring wstrLine1 = pParser->getString();
-	std::wstring wstrLine2 = pParser->getString();
-	std::wstring wstrLine3 = pParser->getString();
-	std::wstring wstrLine4 = pParser->getString();
+	std::string strLine1 = pParser->getString();
+	std::string strLine2 = pParser->getString();
+	std::string strLine3 = pParser->getString();
+	std::string strLine4 = pParser->getString();
 	
-	pParser->getPacketHandlerHelper()->onUpdateSign(iX, iY, iZ, wstrLine1, wstrLine2, wstrLine3, wstrLine4);
+	pParser->getPacketHandlerHelper()->onUpdateSign(iX, iY, iZ, strLine1, strLine2, strLine3, strLine4);
 	return true;
 }
 

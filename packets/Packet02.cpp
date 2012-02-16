@@ -3,15 +3,15 @@
 
 bool Packet02::readPacket(PacketParser *pParser)
 {
-	std::wstring wstrHashOrUsername = pParser->getString();
+	std::string strHashOrUsername = pParser->getString();
 
-	pParser->getPacketHandlerHelper()->onHandshake(wstrHashOrUsername);
+	pParser->getPacketHandlerHelper()->onHandshake(strHashOrUsername);
 	return true;
 }
 
-bool Packet02::writePacket(PacketWriter *pWriter, std::wstring wstrHashOrUsername)
+bool Packet02::writePacket(PacketWriter *pWriter, std::string strHashOrUsername)
 {
 	pWriter->addByte(0x02);
-	pWriter->addString(wstrHashOrUsername);
+	pWriter->addString(strHashOrUsername);
 	return true;
 }

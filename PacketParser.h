@@ -8,6 +8,7 @@ class PacketParser;
 #include <list>
 #include "PacketHandlerHelper.h"
 #include "PacketSource.h"
+#include <iconv.h>
 
 class PacketParser
 {
@@ -43,7 +44,7 @@ public:
 	int16_t getShort();
 	int32_t getInt();
 	int64_t getLong();
-	std::wstring getString();
+	std::string getString();
 	float getFloat();
 	double getDouble();
 	bool getBool();
@@ -57,6 +58,8 @@ private:
 
 	std::list<IPacketHandler *> m_lstPacketHandlers;
 	IPacketHandler *m_pPacketHandlerHelper;
+
+	iconv_t m_iconv;
 };
 
 #endif

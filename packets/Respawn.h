@@ -10,7 +10,7 @@ class Respawn : public Packet
 {
 public:
 	bool readPacket(PacketParser *pParser);
-	bool writePacket(PacketWriter *pWriter, unsigned char ucDimension, unsigned char ucDifficulty, bool bCreative, short iMaxHeight, __int64 iSeed, std::wstring wstrLevelType);
+	bool writePacket(PacketWriter *pWriter, unsigned char ucDimension, unsigned char ucDifficulty, bool bCreative, short iMaxHeight, __int64 iSeed, std::string strLevelType);
 };
 
 REGISTER_PACKET(Respawn);

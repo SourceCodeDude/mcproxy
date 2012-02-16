@@ -8,13 +8,13 @@ bool Respawn::readPacket(PacketParser *pParser)
 	bool bCreative = pParser->getBool();
 	short iMaxHeight = pParser->getShort();
 	__int64 iSeed = pParser->getLong();
-	std::wstring wstrLevelType = pParser->getString();
+	std::string strLevelType = pParser->getString();
 
-	pParser->getPacketHandlerHelper()->onRespawn(ucDimension, ucDifficulty, bCreative, iMaxHeight, iSeed, wstrLevelType);
+	pParser->getPacketHandlerHelper()->onRespawn(ucDimension, ucDifficulty, bCreative, iMaxHeight, iSeed, strLevelType);
 	return true;
 }
 
-bool Respawn::writePacket(PacketWriter *pWriter, unsigned char ucDimension, unsigned char ucDifficulty, bool bCreative, short iMaxHeight, __int64 iSeed, std::wstring wstrLevelType)
+bool Respawn::writePacket(PacketWriter *pWriter, unsigned char ucDimension, unsigned char ucDifficulty, bool bCreative, short iMaxHeight, __int64 iSeed, std::string strLevelType)
 {
 	pWriter->addByte(0x09);
 	pWriter->addByte(ucDimension);
@@ -22,6 +22,6 @@ bool Respawn::writePacket(PacketWriter *pWriter, unsigned char ucDimension, unsi
 	pWriter->addBool(bCreative);
 	pWriter->addShort(iMaxHeight);
 	pWriter->addLong(iSeed);
-	pWriter->addString(wstrLevelType);
+	pWriter->addString(strLevelType);
 	return true;
 }

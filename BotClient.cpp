@@ -27,16 +27,11 @@ void BotClient::OnConnect()
 	sendf(3 + (2 * m_strName.length()), "ct", 0x02, m_strName.c_str());
 }
 
-void BotClient::onHandshake(const std::wstring &wstrHash)
+void BotClient::onHandshake(const std::string &strHash)
 {
 	if (m_pAuth != NULL)
 	{
-		size_t iSize = wstrHash.length() + 1;
-		char *pHash = new char[iSize];
-		size_t iConv = 0;
-		wcstombs_s(&iConv, pHash, iSize, wstrHash.c_str(), iSize);
-		m_pAuth->joinServer(pHash);
-		delete[] pHash;
+		m_pAuth->joinServer(strHash);
 	}
 
 	printf("sent login packet\n");

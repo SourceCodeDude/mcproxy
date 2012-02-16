@@ -2,16 +2,22 @@
 #include "Endian.h"
 #include "PacketParser.h"
 #include "Packets.h"
+#include "utils/convert.h"
 
 PacketParser::PacketParser(ePacketSource packetSource)
 	: m_packetSource(packetSource), m_iLastCompletePacket(-1)
 {
+	// converter UCS-2 -> UTF-8
+	m_iconv = iconv_open("UTF-8", "UCS-2BE");
+
 	m_pPacketHandlerHelper = new PacketHandlerHelper(this);
 }
 
 PacketParser::~PacketParser()
 {
 	delete m_pPacketHandlerHelper;
+
+	iconv_close(m_iconv);
 }
 
 ePacketSource PacketParser::getPacketSource()
@@ -158,23 +164,33 @@ int64_t PacketParser::getLong()
 	return ntohll(iLong);
 }
 
-std::wstring PacketParser::getString()
+std::string PacketParser::getString()
 {
 	int16_t iLength;
 	getBytes((uint8_t *)&iLength, 2);
 	iLength = ntohs(iLength);
 
-	std::wstring wstrString;
-	wstrString.resize(iLength);
+	if (iLength == 0)
+		return std::string("");
+
 	uint16_t *tmp = new uint16_t[iLength];
 	getBytes((uint8_t *)tmp, iLength * 2);
 
-	size_t k = 0;
-	for (std::wstring::iterator i = wstrString.begin(); i != wstrString.end(); ++i)
+	char *output;
+	size_t outsize;
+
+	if (convert(m_iconv, (char *)tmp, iLength * 2, &output, &outsize) == 0)
 	{
-		*i = ntohs(tmp[k++]);
+		delete[] tmp;
+		return std::string("(null)");
 	}
-	return wstrString;
+
+	std::string strString(output, outsize);
+
+	free(output);
+	delete[] tmp;
+
+	return strString;
 }
 
 float PacketParser::getFloat()

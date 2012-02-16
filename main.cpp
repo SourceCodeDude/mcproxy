@@ -7,13 +7,12 @@
 #include "Packets.h"
 #include "PacketParser.h"
 #include "BotClient.h"
-#include "utils/StringConvert.h"
 
 class MyBot : public BotClient
 {
 public:
 	MyBot(ISocketHandler &h)
-		: BotClient("sh0x1337", h)
+		: BotClient("lolbot", h)
 	{
 		m_bHasPosition = false;
 	}
@@ -35,18 +34,18 @@ private:
 		printf("we're connected\n");
 	}
 
-	void onKick(const std::wstring &wstrMessage)
+	void onKick(const std::string &strMessage)
 	{
-		printf("[KICK] %s\n", StringConvert::narrow(wstrMessage).c_str());
+		printf("[KICK] %s\n", strMessage.c_str());
 	}
 
-	void onChat(const std::wstring &wstrMessage)
+	void onChat(const std::string &strMessage)
 	{		
-		printf("[CHAT] %s\n", StringConvert::narrow(wstrMessage).c_str());
+		printf("[CHAT] %s\n", strMessage.c_str());
 
 		/*PacketWriter w;
 		Chat packet;
-		packet.writePacket(&w, L"hello there");
+		packet.writePacket(&w, "hello there");
 		w.send(this);*/
 	}
 
@@ -64,7 +63,7 @@ private:
 
 			PacketWriter w;
 			Respawn respawn;
-			respawn.writePacket(&w, 0, 1, 0, 128, 0LL, L"");
+			respawn.writePacket(&w, 0, 1, 0, 128, 0LL, "");
 			w.send(this);
 		}
 	}
@@ -109,9 +108,9 @@ private:
 		printf("TIMER!! %p / %p\n", dwTimer, pUserData);
 	}
 
-	void onChat(const std::wstring &wstrMessage)
+	void onChat(const std::string &strMessage)
 	{
-		wprintf(L"[CHAT-%d] %s\n", getPacketSource(), wstrMessage.c_str());
+		printf("[CHAT] %s\n", strMessage.c_str());
 	}
 };
 
@@ -137,12 +136,13 @@ int main(int argc, char *argv[])
 	Endian::init();
 	Packets::init();
 
-	SocketHandler h;
+	//SocketHandler h;
+	ProxyHandler h;
 
 	StdoutLog log(LOG_LEVEL_INFO);
 	h.RegStdLog(&log);
 
-	/*ProxyHandler h;
+	//ProxyHandler h;
 	ListenSocket<ProxySocket> l(h);
 	if (l.Bind(25565))
 	{
@@ -157,9 +157,9 @@ int main(int argc, char *argv[])
 			h.Select(0, 5 * 1000);
 		p->update();
 	}
-	while (true);*/
+	while (true);
 
-	Authentication auth;
+	/*Authentication auth;
 	printf("login ret %d\n", auth.login("maveok", "no"));
 	printf("user: '%s'\n", auth.getUsername().c_str());
 	printf("sess: '%s'\n", auth.getSessionId().c_str());
@@ -186,7 +186,7 @@ int main(int argc, char *argv[])
 	}
 	while (h.GetCount());
 
-	//delete b;
+	//delete b;*/
 
 	getchar();
 	return 0;

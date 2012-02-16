@@ -1,19 +1,25 @@
 #include "StdInc.h"
 #include "PacketWriter.h"
 #include "Endian.h"
-#include "utils/StringConvert.h"
+#include "utils/convert.h"
 
 PacketWriter::PacketWriter()
 {
+	// converter UTF-8 -> UCS-2
+	m_iconv = iconv_open("UCS-2", "UTF-8");
 }
 
 PacketWriter::PacketWriter(size_t iAllocSize)
 {
+	// converter UTF-8 -> UCS-2
+	m_iconv = iconv_open("UCS-2", "UTF-8");
+
 	m_strBuffer.reserve(iAllocSize);
 }
 
 PacketWriter::~PacketWriter()
 {
+	iconv_close(m_iconv);
 }
 
 void PacketWriter::addBytes(const char *pData, size_t iSize)
@@ -44,22 +50,20 @@ void PacketWriter::addLong(int64_t iNum)
 	addBytes((const char *)&iNum, sizeof(iNum));
 }
 
-void PacketWriter::addString(std::wstring wstrString)
-{
-	addShort(wstrString.length());
-	int16_t *tmp = new int16_t[wstrString.length()];
-	size_t k = 0;
-	for (std::wstring::iterator i = wstrString.begin(); i != wstrString.end(); ++i)
-	{
-		tmp[k++] = htons(*i);
-	}
-	addBytes((const char *)tmp, wstrString.length() * sizeof(int16_t));
-	delete[] tmp;
-}
-
 void PacketWriter::addString(std::string strString)
 {
-	addString(StringConvert::widen(strString));
+	addShort(strString.length());
+
+	char *pInput = (char *)strString.c_str();
+	size_t iInputSize = strString.length();
+
+	char *pOutput;
+	size_t iOutputSize;
+	convert(m_iconv, pInput, iInputSize, &pOutput, &iOutputSize);
+
+	addBytes((const char *)pOutput, iOutputSize);
+
+	free(pOutput);
 }
 
 void PacketWriter::addFloat(float fNum)

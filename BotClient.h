@@ -16,7 +16,7 @@ public:
 
 protected:
 	virtual void onConnected() { }
-	void onHandshake(const std::wstring &wstrHash);
+	void onHandshake(const std::string &strHash);
 	void onKeepAlive(int iRandom);
 
 private:

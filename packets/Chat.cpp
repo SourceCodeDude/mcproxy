@@ -3,15 +3,15 @@
 
 bool Chat::readPacket(PacketParser *pParser)
 {
-	std::wstring wstrMessage = pParser->getString();
+	std::string strMessage = pParser->getString();
 
-	pParser->getPacketHandlerHelper()->onChat(wstrMessage);
+	pParser->getPacketHandlerHelper()->onChat(strMessage);
 	return true;
 }
 
-bool Chat::writePacket(PacketWriter *pWriter, std::wstring wstrMessage)
+bool Chat::writePacket(PacketWriter *pWriter, std::string strMessage)
 {
 	pWriter->addByte(0x03);
-	pWriter->addString(wstrMessage);
+	pWriter->addString(strMessage);
 	return true;
 }
