@@ -8,12 +8,9 @@ bool WindowItems::readPacket(PacketParser *pParser)
 	unsigned char ucWindow = pParser->getByte();
 	short iCount = pParser->getShort();
 
-	printf("WindowItems window: %d, count: %d\n", ucWindow, iCount);
-
 	for (short i = 0; i < iCount; ++i)
 	{
 		short iItem = pParser->getShort();
-		printf("item %d: %d\n", i, iItem);
 
 		if (iItem != -1)
 		{
@@ -23,7 +20,6 @@ bool WindowItems::readPacket(PacketParser *pParser)
 			if (MinecraftUtils::isEnchantable(iItem))
 			{
 				short iSize = pParser->getShort();
-				printf("#%d (%d) is enchantable, size: %d\n", i, iItem, iSize);
 				if (iSize != -1)
 				{
 					std::vector<unsigned char> vecBytes(iSize);

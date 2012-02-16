@@ -41,6 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="src\Sockets\"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;CURL_STATICLIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -60,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcurl.lib"
+				AdditionalDependencies="libcurl.lib ws2_32.lib zlib.lib Sockets.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -115,7 +116,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="Sockets\"
+				AdditionalIncludeDirectories="src\Sockets\"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;CURL_STATICLIB"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -174,523 +175,523 @@
 			Name="packets"
 			>
 			<File
-				RelativePath=".\packets\AddObjectVehicle.cpp"
+				RelativePath=".\src\packets\AddObjectVehicle.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\AddObjectVehicle.h"
+				RelativePath=".\src\packets\AddObjectVehicle.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Animation.cpp"
+				RelativePath=".\src\packets\Animation.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Animation.h"
+				RelativePath=".\src\packets\Animation.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\AttachEntity.cpp"
+				RelativePath=".\src\packets\AttachEntity.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\AttachEntity.h"
+				RelativePath=".\src\packets\AttachEntity.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\BlockAction.cpp"
+				RelativePath=".\src\packets\BlockAction.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\BlockAction.h"
+				RelativePath=".\src\packets\BlockAction.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\BlockChange.cpp"
+				RelativePath=".\src\packets\BlockChange.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\BlockChange.h"
+				RelativePath=".\src\packets\BlockChange.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Chat.cpp"
+				RelativePath=".\src\packets\Chat.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Chat.h"
+				RelativePath=".\src\packets\Chat.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\CollectItem.cpp"
+				RelativePath=".\src\packets\CollectItem.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\CollectItem.h"
+				RelativePath=".\src\packets\CollectItem.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\CreativeInventoryAction.cpp"
+				RelativePath=".\src\packets\CreativeInventoryAction.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\CreativeInventoryAction.h"
+				RelativePath=".\src\packets\CreativeInventoryAction.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\DestroyEntity.cpp"
+				RelativePath=".\src\packets\DestroyEntity.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\DestroyEntity.h"
+				RelativePath=".\src\packets\DestroyEntity.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EnchantItem.cpp"
+				RelativePath=".\src\packets\EnchantItem.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EnchantItem.h"
+				RelativePath=".\src\packets\EnchantItem.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Entity.cpp"
+				RelativePath=".\src\packets\Entity.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Entity.h"
+				RelativePath=".\src\packets\Entity.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityAction.cpp"
+				RelativePath=".\src\packets\EntityAction.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityAction.h"
+				RelativePath=".\src\packets\EntityAction.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityEffect.cpp"
+				RelativePath=".\src\packets\EntityEffect.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityEffect.h"
+				RelativePath=".\src\packets\EntityEffect.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityLook.cpp"
+				RelativePath=".\src\packets\EntityLook.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityLook.h"
+				RelativePath=".\src\packets\EntityLook.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityLookRelativeMove.cpp"
+				RelativePath=".\src\packets\EntityLookRelativeMove.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityLookRelativeMove.h"
+				RelativePath=".\src\packets\EntityLookRelativeMove.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityMetadata.cpp"
+				RelativePath=".\src\packets\EntityMetadata.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityMetadata.h"
+				RelativePath=".\src\packets\EntityMetadata.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityRelativeMove.cpp"
+				RelativePath=".\src\packets\EntityRelativeMove.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityRelativeMove.h"
+				RelativePath=".\src\packets\EntityRelativeMove.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityStatus.cpp"
+				RelativePath=".\src\packets\EntityStatus.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityStatus.h"
+				RelativePath=".\src\packets\EntityStatus.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityTeleport.cpp"
+				RelativePath=".\src\packets\EntityTeleport.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityTeleport.h"
+				RelativePath=".\src\packets\EntityTeleport.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityVelocity.cpp"
+				RelativePath=".\src\packets\EntityVelocity.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\EntityVelocity.h"
+				RelativePath=".\src\packets\EntityVelocity.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Equipment.cpp"
+				RelativePath=".\src\packets\Equipment.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Equipment.h"
+				RelativePath=".\src\packets\Equipment.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Experience.cpp"
+				RelativePath=".\src\packets\Experience.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Experience.h"
+				RelativePath=".\src\packets\Experience.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\ExperienceOrb.cpp"
+				RelativePath=".\src\packets\ExperienceOrb.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\ExperienceOrb.h"
+				RelativePath=".\src\packets\ExperienceOrb.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Explosion.cpp"
+				RelativePath=".\src\packets\Explosion.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Explosion.h"
+				RelativePath=".\src\packets\Explosion.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\HealthUpdate.cpp"
+				RelativePath=".\src\packets\HealthUpdate.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\HealthUpdate.h"
+				RelativePath=".\src\packets\HealthUpdate.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\HoldingChange.cpp"
+				RelativePath=".\src\packets\HoldingChange.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\HoldingChange.h"
+				RelativePath=".\src\packets\HoldingChange.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\IncrementStatistic.cpp"
+				RelativePath=".\src\packets\IncrementStatistic.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\IncrementStatistic.h"
+				RelativePath=".\src\packets\IncrementStatistic.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\ItemData.cpp"
+				RelativePath=".\src\packets\ItemData.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\ItemData.h"
+				RelativePath=".\src\packets\ItemData.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Kick.cpp"
+				RelativePath=".\src\packets\Kick.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Kick.h"
+				RelativePath=".\src\packets\Kick.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\MapChunk.cpp"
+				RelativePath=".\src\packets\MapChunk.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\MapChunk.h"
+				RelativePath=".\src\packets\MapChunk.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\MobSpawn.cpp"
+				RelativePath=".\src\packets\MobSpawn.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\MobSpawn.h"
+				RelativePath=".\src\packets\MobSpawn.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\MultiBlockChange.cpp"
+				RelativePath=".\src\packets\MultiBlockChange.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\MultiBlockChange.h"
+				RelativePath=".\src\packets\MultiBlockChange.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\NamedEntitySpawn.cpp"
+				RelativePath=".\src\packets\NamedEntitySpawn.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\NamedEntitySpawn.h"
+				RelativePath=".\src\packets\NamedEntitySpawn.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\NewInvalidState.cpp"
+				RelativePath=".\src\packets\NewInvalidState.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\NewInvalidState.h"
+				RelativePath=".\src\packets\NewInvalidState.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\OpenWindow.cpp"
+				RelativePath=".\src\packets\OpenWindow.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\OpenWindow.h"
+				RelativePath=".\src\packets\OpenWindow.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Packet01.cpp"
+				RelativePath=".\src\packets\Packet01.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Packet01.h"
+				RelativePath=".\src\packets\Packet01.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Packet02.cpp"
+				RelativePath=".\src\packets\Packet02.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Packet02.h"
+				RelativePath=".\src\packets\Packet02.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Painting.cpp"
+				RelativePath=".\src\packets\Painting.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Painting.h"
+				RelativePath=".\src\packets\Painting.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PickupSpawn.cpp"
+				RelativePath=".\src\packets\PickupSpawn.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PickupSpawn.h"
+				RelativePath=".\src\packets\PickupSpawn.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Ping.cpp"
+				RelativePath=".\src\packets\Ping.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Ping.h"
+				RelativePath=".\src\packets\Ping.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Player.cpp"
+				RelativePath=".\src\packets\Player.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Player.h"
+				RelativePath=".\src\packets\Player.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerBlockPlacement.cpp"
+				RelativePath=".\src\packets\PlayerBlockPlacement.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerBlockPlacement.h"
+				RelativePath=".\src\packets\PlayerBlockPlacement.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerDigging.cpp"
+				RelativePath=".\src\packets\PlayerDigging.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerDigging.h"
+				RelativePath=".\src\packets\PlayerDigging.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerListItem.cpp"
+				RelativePath=".\src\packets\PlayerListItem.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerListItem.h"
+				RelativePath=".\src\packets\PlayerListItem.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerLook.cpp"
+				RelativePath=".\src\packets\PlayerLook.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerLook.h"
+				RelativePath=".\src\packets\PlayerLook.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerPosition.cpp"
+				RelativePath=".\src\packets\PlayerPosition.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerPosition.h"
+				RelativePath=".\src\packets\PlayerPosition.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerPositionLook.cpp"
+				RelativePath=".\src\packets\PlayerPositionLook.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PlayerPositionLook.h"
+				RelativePath=".\src\packets\PlayerPositionLook.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PluginMessage.cpp"
+				RelativePath=".\src\packets\PluginMessage.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PluginMessage.h"
+				RelativePath=".\src\packets\PluginMessage.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PreChunk.cpp"
+				RelativePath=".\src\packets\PreChunk.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\PreChunk.h"
+				RelativePath=".\src\packets\PreChunk.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\RemoveEntityEffect.cpp"
+				RelativePath=".\src\packets\RemoveEntityEffect.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\RemoveEntityEffect.h"
+				RelativePath=".\src\packets\RemoveEntityEffect.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Respawn.cpp"
+				RelativePath=".\src\packets\Respawn.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Respawn.h"
+				RelativePath=".\src\packets\Respawn.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\ServerListPing.cpp"
+				RelativePath=".\src\packets\ServerListPing.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\ServerListPing.h"
+				RelativePath=".\src\packets\ServerListPing.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\SoundEffect.cpp"
+				RelativePath=".\src\packets\SoundEffect.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\SoundEffect.h"
+				RelativePath=".\src\packets\SoundEffect.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\SpawnPosition.cpp"
+				RelativePath=".\src\packets\SpawnPosition.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\SpawnPosition.h"
+				RelativePath=".\src\packets\SpawnPosition.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Thunderbolt.cpp"
+				RelativePath=".\src\packets\Thunderbolt.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Thunderbolt.h"
+				RelativePath=".\src\packets\Thunderbolt.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\TimeUpdate.cpp"
+				RelativePath=".\src\packets\TimeUpdate.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\TimeUpdate.h"
+				RelativePath=".\src\packets\TimeUpdate.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Transaction.cpp"
+				RelativePath=".\src\packets\Transaction.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\Transaction.h"
+				RelativePath=".\src\packets\Transaction.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\UpdateSign.cpp"
+				RelativePath=".\src\packets\UpdateSign.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\UpdateSign.h"
+				RelativePath=".\src\packets\UpdateSign.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\UseBed.cpp"
+				RelativePath=".\src\packets\UseBed.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\UseBed.h"
+				RelativePath=".\src\packets\UseBed.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\UseEntity.cpp"
+				RelativePath=".\src\packets\UseEntity.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\UseEntity.h"
+				RelativePath=".\src\packets\UseEntity.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\WindowClick.cpp"
+				RelativePath=".\src\packets\WindowClick.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\WindowClick.h"
+				RelativePath=".\src\packets\WindowClick.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\WindowClose.cpp"
+				RelativePath=".\src\packets\WindowClose.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\WindowClose.h"
+				RelativePath=".\src\packets\WindowClose.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\WindowItems.cpp"
+				RelativePath=".\src\packets\WindowItems.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\WindowItems.h"
+				RelativePath=".\src\packets\WindowItems.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\WindowProperty.cpp"
+				RelativePath=".\src\packets\WindowProperty.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\WindowProperty.h"
+				RelativePath=".\src\packets\WindowProperty.h"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\WindowSlot.cpp"
+				RelativePath=".\src\packets\WindowSlot.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\packets\WindowSlot.h"
+				RelativePath=".\src\packets\WindowSlot.h"
 				>
 			</File>
 		</Filter>
@@ -698,11 +699,11 @@
 			Name="misc"
 			>
 			<File
-				RelativePath=".\misc\inttypes.h"
+				RelativePath=".\src\misc\inttypes.h"
 				>
 			</File>
 			<File
-				RelativePath=".\misc\stdint.h"
+				RelativePath=".\src\misc\stdint.h"
 				>
 			</File>
 		</Filter>
@@ -710,7 +711,7 @@
 			Name="utils"
 			>
 			<File
-				RelativePath=".\utils\convert.cpp"
+				RelativePath=".\src\utils\convert.cpp"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -722,31 +723,23 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\utils\convert.h"
+				RelativePath=".\src\utils\convert.h"
 				>
 			</File>
 			<File
-				RelativePath=".\utils\MinecraftUtils.cpp"
+				RelativePath=".\src\utils\MinecraftUtils.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\utils\MinecraftUtils.h"
+				RelativePath=".\src\utils\MinecraftUtils.h"
 				>
 			</File>
 			<File
-				RelativePath=".\utils\StringConvert.cpp"
+				RelativePath=".\src\utils\Timer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\utils\StringConvert.h"
-				>
-			</File>
-			<File
-				RelativePath=".\utils\Timer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\utils\Timer.h"
+				RelativePath=".\src\utils\Timer.h"
 				>
 			</File>
 		</Filter>
@@ -754,15 +747,15 @@
 			Name="winiconv"
 			>
 			<File
-				RelativePath=".\winiconv\iconv.h"
+				RelativePath=".\src\winiconv\iconv.h"
 				>
 			</File>
 			<File
-				RelativePath=".\winiconv\mlang.h"
+				RelativePath=".\src\winiconv\mlang.h"
 				>
 			</File>
 			<File
-				RelativePath=".\winiconv\win_iconv.c"
+				RelativePath=".\src\winiconv\win_iconv.c"
 				>
 				<FileConfiguration
 					Name="Release|Win32"
@@ -775,107 +768,107 @@
 			</File>
 		</Filter>
 		<File
-			RelativePath=".\Authentication.cpp"
+			RelativePath=".\src\Authentication.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\Authentication.h"
+			RelativePath=".\src\Authentication.h"
 			>
 		</File>
 		<File
-			RelativePath=".\BotClient.cpp"
+			RelativePath=".\src\BotClient.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\BotClient.h"
+			RelativePath=".\src\BotClient.h"
 			>
 		</File>
 		<File
-			RelativePath=".\Endian.cpp"
+			RelativePath=".\src\Endian.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\Endian.h"
+			RelativePath=".\src\Endian.h"
 			>
 		</File>
 		<File
-			RelativePath=".\IPacketHandler.cpp"
+			RelativePath=".\src\IPacketHandler.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\IPacketHandler.h"
+			RelativePath=".\src\IPacketHandler.h"
 			>
 		</File>
 		<File
-			RelativePath=".\main.cpp"
+			RelativePath=".\src\main.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\Packet.h"
+			RelativePath=".\src\Packet.h"
 			>
 		</File>
 		<File
-			RelativePath=".\PacketHandlerHelper.cpp"
+			RelativePath=".\src\PacketHandlerHelper.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\PacketHandlerHelper.h"
+			RelativePath=".\src\PacketHandlerHelper.h"
 			>
 		</File>
 		<File
-			RelativePath=".\PacketParser.cpp"
+			RelativePath=".\src\PacketParser.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\PacketParser.h"
+			RelativePath=".\src\PacketParser.h"
 			>
 		</File>
 		<File
-			RelativePath=".\Packets.cpp"
+			RelativePath=".\src\Packets.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\Packets.h"
+			RelativePath=".\src\Packets.h"
 			>
 		</File>
 		<File
-			RelativePath=".\PacketSource.h"
+			RelativePath=".\src\PacketSource.h"
 			>
 		</File>
 		<File
-			RelativePath=".\PacketWriter.cpp"
+			RelativePath=".\src\PacketWriter.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\PacketWriter.h"
+			RelativePath=".\src\PacketWriter.h"
 			>
 		</File>
 		<File
-			RelativePath=".\ProxyClient.cpp"
+			RelativePath=".\src\ProxyClient.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\ProxyClient.h"
+			RelativePath=".\src\ProxyClient.h"
 			>
 		</File>
 		<File
-			RelativePath=".\ProxyHandler.cpp"
+			RelativePath=".\src\ProxyHandler.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\ProxyHandler.h"
+			RelativePath=".\src\ProxyHandler.h"
 			>
 		</File>
 		<File
-			RelativePath=".\ProxySocket.cpp"
+			RelativePath=".\src\ProxySocket.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\ProxySocket.h"
+			RelativePath=".\src\ProxySocket.h"
 			>
 		</File>
 		<File
-			RelativePath=".\StdInc.cpp"
+			RelativePath=".\src\StdInc.cpp"
 			>
 			<FileConfiguration
 				Name="Release|Win32"
@@ -887,19 +880,19 @@
 			</FileConfiguration>
 		</File>
 		<File
-			RelativePath=".\StdInc.h"
+			RelativePath=".\src\StdInc.h"
 			>
 		</File>
 		<File
-			RelativePath=".\TODO.txt"
+			RelativePath=".\src\TODO.txt"
 			>
 		</File>
 		<File
-			RelativePath=".\VanillaClient.cpp"
+			RelativePath=".\src\VanillaClient.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\VanillaClient.h"
+			RelativePath=".\src\VanillaClient.h"
 			>
 		</File>
 	</Files>
