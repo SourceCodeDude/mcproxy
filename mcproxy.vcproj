@@ -710,11 +710,35 @@
 			Name="utils"
 			>
 			<File
+				RelativePath=".\utils\convert.cpp"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\utils\convert.h"
+				>
+			</File>
+			<File
 				RelativePath=".\utils\MinecraftUtils.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\utils\MinecraftUtils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\utils\StringConvert.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\utils\StringConvert.h"
 				>
 			</File>
 			<File
@@ -724,6 +748,30 @@
 			<File
 				RelativePath=".\utils\Timer.h"
 				>
+			</File>
+		</Filter>
+		<Filter
+			Name="winiconv"
+			>
+			<File
+				RelativePath=".\winiconv\iconv.h"
+				>
+			</File>
+			<File
+				RelativePath=".\winiconv\mlang.h"
+				>
+			</File>
+			<File
+				RelativePath=".\winiconv\win_iconv.c"
+				>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<File

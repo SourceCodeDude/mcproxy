@@ -1,6 +1,6 @@
 #include "convert.h"
-#include <stdlib.h>
 #include <errno.h>
+#include <stdlib.h>
 
 int grow(char** output, size_t* outlen, char** outbuf, size_t* outbufsz) {
   size_t newlen;
@@ -42,7 +42,7 @@ int convert(iconv_t iv, char* input, size_t inlen, char** output, size_t* outlen
   // convert input
   do {
     if (grow(output, outlen, &outbuf, &outbufsz)) {
-      rv = iconv(iv, (char **) &inbuf, &inbufsz, &outbuf, &outbufsz);
+      rv = iconv(iv, (const char **) &inbuf, &inbufsz, &outbuf, &outbufsz);
     }
     else {
       goto error;

@@ -73,7 +73,7 @@ bool MinecraftUtils::isEnchantable(int iID)
 	case 0x13A:
 	case 0x13B:
 	case 0x13C:
-	case 0x14D:
+	case 0x13D:
 
 		return true;
 	}

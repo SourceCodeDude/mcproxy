@@ -5,7 +5,12 @@ class PacketWriter;
 
 #include <string>
 #include <TcpSocket.h>
+
+#ifdef WIN32
+#include "winiconv/iconv.h"
+#else
 #include <iconv.h>
+#endif
 
 class PacketWriter
 {

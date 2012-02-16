@@ -8,7 +8,12 @@ class PacketParser;
 #include <list>
 #include "PacketHandlerHelper.h"
 #include "PacketSource.h"
+
+#ifdef WIN32
+#include "winiconv/iconv.h"
+#else
 #include <iconv.h>
+#endif
 
 class PacketParser
 {
