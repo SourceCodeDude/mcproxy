@@ -93,7 +93,7 @@ void PacketParser::parseInput(const char *pData, size_t iSize)
 					(*x)->m_packetSource = UNKNOWN;
 				}
 			}
-			catch (PacketIncompleteNotification ex)
+			catch (PacketIncompleteNotification)
 			{
 				// This packet is incomplete, we'll do it next time.
 				delete pack;
