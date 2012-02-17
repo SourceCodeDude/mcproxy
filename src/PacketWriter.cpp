@@ -83,7 +83,7 @@ void PacketWriter::addBool(bool bBool)
 	addBytes((const char *)&bBool, 1);
 }
 
-void PacketWriter::send(TcpSocket *pSocket)
+void PacketWriter::send(TcpClient *pSocket)
 {
-	pSocket->SendBuf(m_strBuffer.c_str(), m_strBuffer.length());
+	pSocket->send(m_strBuffer.c_str(), m_strBuffer.length());
 }

@@ -1,12 +1,9 @@
 #include "StdInc.h"
 #include "ProxyClient.h"
-#include "ProxyHandler.h"
 
-ProxyClient::ProxyClient(ISocketHandler &h)
-	: VanillaClient(h), m_iPort(-1)
+ProxyClient::ProxyClient(ProxySocket *pProxySocket)
+	: VanillaClient(), m_iPort(-1), m_pProxySocket(pProxySocket)
 {
-	((ProxyHandler &)h).notifyProxyClient(this);
-
 	m_pPacketParser = new PacketParser(CLIENT);
 	m_pPacketParser->registerPacketHandler(this);
 }
@@ -34,7 +31,7 @@ int ProxyClient::getServerPort()
 
 ProxySocket *ProxyClient::getProxySocket()
 {
-	return ((ProxyHandler &)Handler()).getSocket();
+	return m_pProxySocket;
 }
 
 void ProxyClient::onProxyData(const char *pData, size_t iSize)
@@ -49,23 +46,19 @@ void ProxyClient::onProxyData(const char *pData, size_t iSize)
 		getchar();
 	}
 
-	SendBuf(pData, iSize);
+	this->send(pData, iSize);
 }
 
 void ProxyClient::onData(const char *pData, size_t iSize)
-{
-	ProxySocket *pSocket = getProxySocket();
-	if (pSocket != NULL && pSocket->Ready())
+{	
+	VanillaClient::onData(pData, iSize);
+	
+	if (m_pProxySocket != NULL)
 	{
-		pSocket->SendBuf(pData, iSize);
+		m_pProxySocket->send(pData, iSize);
 	}
 	else
 	{
-		printf("ProxyClient::onData, socket not ready\n");
+		printf("ProxyClient::onData, socket not ready}n");
 	}
-}
-
-void ProxyClient::OnDelete()
-{
-	((ProxyHandler &)Handler()).notifyProxyClient(NULL);
 }

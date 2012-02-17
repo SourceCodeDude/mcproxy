@@ -7,8 +7,6 @@ bool OpenWindow::readPacket(PacketParser *pParser)
 	unsigned char ucType = pParser->getByte();
 	std::string strTitle = pParser->getString();
 	unsigned char ucNumSlots = pParser->getByte();
-
-	printf("open window %s\n", strTitle.c_str());
 	
 	pParser->getPacketHandlerHelper()->onOpenWindow(ucWindow, ucType, strTitle, ucNumSlots);
 	return true;

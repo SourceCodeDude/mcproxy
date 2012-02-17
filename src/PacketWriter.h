@@ -4,7 +4,7 @@ class PacketWriter;
 #define _PACKETWRITER_H
 
 #include <string>
-#include <TcpSocket.h>
+#include "TcpClient.h"
 
 #ifdef WIN32
 #include "winiconv/iconv.h"
@@ -30,7 +30,7 @@ public:
 	void addDouble(double dNum);
 	void addBool(bool bBool);
 
-	void send(TcpSocket *pSocket);
+	void send(TcpClient *pSocket);
 
 private:
 	std::string m_strBuffer;

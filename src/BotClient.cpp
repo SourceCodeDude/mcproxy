@@ -3,8 +3,8 @@
 
 #define PROTOCOL_VERSION 23
 
-BotClient::BotClient(const std::string &strName, ISocketHandler &h)
-	: VanillaClient(h), m_pAuth(NULL)
+BotClient::BotClient(const std::string &strName)
+	: VanillaClient(), m_pAuth(NULL)
 {
 	m_strName = strName;
 }

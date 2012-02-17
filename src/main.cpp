@@ -1,13 +1,15 @@
 #include "StdInc.h"
 #include <assert.h>
 #include <string>
-#include <SocketHandler.h>
+//#include <SocketHandler.h>
 #include "Endian.h"
 #include "Authentication.h"
 #include "Packets.h"
 #include "PacketParser.h"
 #include "BotClient.h"
+#include "ProxyServer.h"
 
+#if 0
 class MyBot : public BotClient
 {
 public:
@@ -80,12 +82,14 @@ private:
 	bool m_bHasPosition;
 	float m_fX, m_fY, m_fZ;
 };
+#endif
 
 #include "ProxyClient.h"
 #include "ProxySocket.h"
-#include <ListenSocket.h>
+//#include <ListenSocket.h>
 #include "utils/Timer.h"
 
+#if 0
 class MyProxy : public ProxyClient, public Timer
 {
 public:
@@ -113,14 +117,40 @@ private:
 		printf("[CHAT] %s\n", strMessage.c_str());
 	}
 };
+#endif
 
-#include "ProxyHandler.h"
-#include <StdoutLog.h>
+//#include "ProxyHandler.h"
+//#include <StdoutLog.h>
+
+struct ev_loop *g_pLoop = NULL;
+
+class MyProxyClient : public ProxyClient
+{
+public:
+	MyProxyClient(ProxySocket *pSocket)
+		: ProxyClient(pSocket)
+	{		
+		connect(g_pLoop, "91.121.178.221", 25565);
+	}
+};
+
+class MyProxyServer : public ProxyServer
+{
+public:
+	MyProxyServer()
+		: ProxyServer()
+	{
+	}
+	
+private:
+	ProxyClient *getClient(ProxySocket *pClient)
+	{
+		return new MyProxyClient(pClient);
+	}
+};
 
 int main(int argc, char *argv[])
-{
-	printf("float size: %d, double size: %d\n", sizeof(float), sizeof(double));
-	
+{	
 	assert(sizeof(float) == 4);
 	assert(sizeof(double) == 8);
 
@@ -137,7 +167,7 @@ int main(int argc, char *argv[])
 	Packets::init();
 
 	//SocketHandler h;
-	ProxyHandler h;
+	/*ProxyHandler h;
 
 	StdoutLog log(LOG_LEVEL_INFO);
 	h.RegStdLog(&log);
@@ -157,7 +187,21 @@ int main(int argc, char *argv[])
 			h.Select(0, 5 * 1000);
 		p->update();
 	}
-	while (true);
+	while (true);*/
+	
+	g_pLoop = ev_default_loop(0);
+
+	MyProxyServer server;
+	server.bind(25565);
+	server.listen(g_pLoop);
+
+	// Start infinite loop
+	while (true)
+	{
+		ev_loop(g_pLoop, 0);
+	}
+
+	return 0;
 
 	/*Authentication auth;
 	printf("login ret %d\n", auth.login("maveok", "no"));

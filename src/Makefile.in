@@ -49,7 +49,8 @@ PROGRAMS = $(bin_PROGRAMS)
 am_mcproxy_OBJECTS = Authentication.$(OBJEXT) \
 	PacketHandlerHelper.$(OBJEXT) ProxyClient.$(OBJEXT) \
 	VanillaClient.$(OBJEXT) BotClient.$(OBJEXT) \
-	PacketParser.$(OBJEXT) ProxyHandler.$(OBJEXT) main.$(OBJEXT) \
+	PacketParser.$(OBJEXT) ProxyServer.$(OBJEXT) \
+	TcpServer.$(OBJEXT) TcpClient.$(OBJEXT) main.$(OBJEXT) \
 	Endian.$(OBJEXT) PacketWriter.$(OBJEXT) ProxySocket.$(OBJEXT) \
 	IPacketHandler.$(OBJEXT) Packets.$(OBJEXT) StdInc.$(OBJEXT) \
 	AddObjectVehicle.$(OBJEXT) Animation.$(OBJEXT) \
@@ -84,7 +85,7 @@ am_mcproxy_OBJECTS = Authentication.$(OBJEXT) \
 	WindowSlot.$(OBJEXT) MinecraftUtils.$(OBJEXT) Timer.$(OBJEXT) \
 	convert.$(OBJEXT) linux.$(OBJEXT)
 mcproxy_OBJECTS = $(am_mcproxy_OBJECTS)
-mcproxy_DEPENDENCIES = ../../cppsockets/libSockets.a
+mcproxy_DEPENDENCIES = ../../libev/lib/libev.a
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -112,7 +113,7 @@ CPP = @CPP@
 CPPFLAGS = @CPPFLAGS@
 CXX = @CXX@
 CXXDEPMODE = @CXXDEPMODE@
-CXXFLAGS = -I./ -I../../cppsockets
+CXXFLAGS = -I./
 CYGPATH_W = @CYGPATH_W@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
@@ -192,27 +193,27 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 mcproxy_SOURCES = Authentication.cpp PacketHandlerHelper.cpp \
 	ProxyClient.cpp VanillaClient.cpp BotClient.cpp \
-	PacketParser.cpp ProxyHandler.cpp main.cpp Endian.cpp \
-	PacketWriter.cpp ProxySocket.cpp IPacketHandler.cpp \
-	Packets.cpp StdInc.cpp packets/AddObjectVehicle.cpp \
-	packets/Animation.cpp packets/AttachEntity.cpp \
-	packets/BlockAction.cpp packets/BlockChange.cpp \
-	packets/Chat.cpp packets/CollectItem.cpp \
-	packets/CreativeInventoryAction.cpp packets/DestroyEntity.cpp \
-	packets/EnchantItem.cpp packets/Entity.cpp \
-	packets/EntityAction.cpp packets/EntityEffect.cpp \
-	packets/EntityLook.cpp packets/EntityLookRelativeMove.cpp \
-	packets/EntityMetadata.cpp packets/EntityRelativeMove.cpp \
-	packets/EntityStatus.cpp packets/EntityTeleport.cpp \
-	packets/EntityVelocity.cpp packets/Equipment.cpp \
-	packets/Experience.cpp packets/ExperienceOrb.cpp \
-	packets/Explosion.cpp packets/HealthUpdate.cpp \
-	packets/HoldingChange.cpp packets/IncrementStatistic.cpp \
-	packets/ItemData.cpp packets/Kick.cpp packets/MapChunk.cpp \
-	packets/MobSpawn.cpp packets/MultiBlockChange.cpp \
-	packets/NamedEntitySpawn.cpp packets/NewInvalidState.cpp \
-	packets/OpenWindow.cpp packets/Packet01.cpp \
-	packets/Packet02.cpp packets/Painting.cpp \
+	PacketParser.cpp ProxyServer.cpp TcpServer.cpp TcpClient.cpp \
+	main.cpp Endian.cpp PacketWriter.cpp ProxySocket.cpp \
+	IPacketHandler.cpp Packets.cpp StdInc.cpp \
+	packets/AddObjectVehicle.cpp packets/Animation.cpp \
+	packets/AttachEntity.cpp packets/BlockAction.cpp \
+	packets/BlockChange.cpp packets/Chat.cpp \
+	packets/CollectItem.cpp packets/CreativeInventoryAction.cpp \
+	packets/DestroyEntity.cpp packets/EnchantItem.cpp \
+	packets/Entity.cpp packets/EntityAction.cpp \
+	packets/EntityEffect.cpp packets/EntityLook.cpp \
+	packets/EntityLookRelativeMove.cpp packets/EntityMetadata.cpp \
+	packets/EntityRelativeMove.cpp packets/EntityStatus.cpp \
+	packets/EntityTeleport.cpp packets/EntityVelocity.cpp \
+	packets/Equipment.cpp packets/Experience.cpp \
+	packets/ExperienceOrb.cpp packets/Explosion.cpp \
+	packets/HealthUpdate.cpp packets/HoldingChange.cpp \
+	packets/IncrementStatistic.cpp packets/ItemData.cpp \
+	packets/Kick.cpp packets/MapChunk.cpp packets/MobSpawn.cpp \
+	packets/MultiBlockChange.cpp packets/NamedEntitySpawn.cpp \
+	packets/NewInvalidState.cpp packets/OpenWindow.cpp \
+	packets/Packet01.cpp packets/Packet02.cpp packets/Painting.cpp \
 	packets/PickupSpawn.cpp packets/Ping.cpp packets/Player.cpp \
 	packets/PlayerBlockPlacement.cpp packets/PlayerDigging.cpp \
 	packets/PlayerListItem.cpp packets/PlayerLook.cpp \
@@ -228,7 +229,7 @@ mcproxy_SOURCES = Authentication.cpp PacketHandlerHelper.cpp \
 	packets/WindowProperty.cpp packets/WindowSlot.cpp \
 	utils/MinecraftUtils.cpp utils/Timer.cpp utils/convert.cpp \
 	misc/linux.cpp
-mcproxy_LDADD = ../../cppsockets/libSockets.a -lpthread -lcurl
+mcproxy_LDADD = ../../libev/lib/libev.a -lpthread -lcurl
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -387,7 +388,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/PluginMessage.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/PreChunk.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ProxyClient.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ProxyHandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ProxyServer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ProxySocket.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/RemoveEntityEffect.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Respawn.Po@am__quote@
@@ -395,6 +396,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/SoundEffect.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/SpawnPosition.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/StdInc.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/TcpClient.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/TcpServer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Thunderbolt.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/TimeUpdate.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/Timer.Po@am__quote@

@@ -96,7 +96,6 @@ void PacketParser::parseInput(const char *pData, size_t iSize)
 			catch (PacketIncompleteNotification ex)
 			{
 				// This packet is incomplete, we'll do it next time.
-				printf("packet 0x%02X incomplete, last complete 0x%02X\n", p, m_iLastCompletePacket);
 				delete pack;
 				break;
 			}

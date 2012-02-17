@@ -4,8 +4,8 @@
 #include <stdarg.h>
 #include <string.h>
 
-VanillaClient::VanillaClient(ISocketHandler &h)
-	: TcpSocket(h)
+VanillaClient::VanillaClient()
+	: TcpClient()
 {
 	m_pPacketParser = new PacketParser(SERVER);
 	m_pPacketParser->registerPacketHandler(this);
@@ -115,35 +115,22 @@ int VanillaClient::sendf(int bytes, const char *szFormat, ...)
 
 	//assert(buf - buf2 == bytes);
 
-	SendBuf((const char *)buf2, bytes, 0);
+	send((const char *)buf2, bytes);
 	
 	free(buf2);
 
 	return bytes;
 }
 
-void VanillaClient::OnRead()
+void VanillaClient::onData(const char *pData, size_t iSize)
 {
-	// OnRead of TcpSocket actually reads the data from the socket
-	// and moves it to the input buffer (ibuf)
-	TcpSocket::OnRead();
-
-	// get number of bytes in input buffer
-	size_t iSize = ibuf.GetLength();
-	if (iSize > 0)
+	try
 	{
-		char tmp[TCP_BUFSIZE_READ];
-		ibuf.Read(tmp, iSize);
-
-		try
-		{
-			m_pPacketParser->parseInput(tmp, iSize);
-			onData(tmp, iSize);
-		}
-		catch (PacketParser::Exception ex)
-		{
-			printf("PacketParser::Exception (packet id 0x%02X, last ok 0x%02X)\n", ex.m_iPacketId, ex.m_iLastCompletePacket);
-			getchar();
-		}
+		m_pPacketParser->parseInput(pData, iSize);
+	}
+	catch (PacketParser::Exception ex)
+	{
+		printf("PacketParser::Exception (packet id 0x%02X, last ok 0x%02X)\n", ex.m_iPacketId, ex.m_iLastCompletePacket);
+		getchar();
 	}
 }

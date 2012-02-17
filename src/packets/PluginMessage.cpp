@@ -1,5 +1,6 @@
 #include "StdInc.h"
 #include "PluginMessage.h"
+#include <vector>
 
 bool PluginMessage::readPacket(PacketParser *pParser)
 {

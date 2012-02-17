@@ -9,7 +9,7 @@ class BotClient;
 class BotClient : public VanillaClient
 {
 public:
-	BotClient(const std::string &strName, ISocketHandler &h);
+	BotClient(const std::string &strName);
 	~BotClient();
 
 	void setAuthentication(Authentication *pAuth);

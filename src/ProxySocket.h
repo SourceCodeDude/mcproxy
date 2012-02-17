@@ -3,19 +3,18 @@ class ProxySocket;
 #ifndef _PROXYSOCKET_H
 #define _PROXYSOCKET_H
 
-#include <TcpSocket.h>
+#include "TcpClient.h"
 #include "ProxyClient.h"
 
-class ProxySocket : public TcpSocket
+class ProxySocket : public TcpClient
 {
 public:
-	ProxySocket(ISocketHandler &h);
+	ProxySocket();
 	~ProxySocket();
+	
+	void onData(const char *pData, size_t iSize);
 
-private:
-	void OnAccept();
-	void OnDelete();
-	void OnRead();
+	ProxyClient *m_pClient;
 };
 
 #endif
