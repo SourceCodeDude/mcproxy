@@ -42,7 +42,11 @@ private:
 	void onRead(struct ev_loop *loop, CustomIO *watcher, int revents);
 	void onWrite(struct ev_loop *loop, CustomIO *watcher, int revents);
 	
+#ifdef WIN32
+	SOCKET m_iSocket;
+#else
 	int m_iSocket;
+#endif
 	std::string m_strSendBuffer;
 	CustomIO m_ioWatcher;
 	struct ev_io *m_pOtherWatcher;

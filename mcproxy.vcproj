@@ -45,8 +45,9 @@
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;CURL_STATICLIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
-				UsePrecompiledHeader="0"
+				RuntimeLibrary="1"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough="StdInc.h"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -61,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcurl.lib ws2_32.lib zlib.lib Sockets.lib"
+				AdditionalDependencies="libcurl.lib ws2_32.lib zlib.lib libev.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -136,7 +137,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcurl.lib ws2_32.lib zlib.lib Sockets.lib"
+				AdditionalDependencies="libcurl.lib ws2_32.lib zlib.lib libev.lib"
 				LinkIncremental="1"
 				IgnoreAllDefaultLibraries="false"
 				GenerateDebugInformation="false"
@@ -706,6 +707,10 @@
 				RelativePath=".\src\misc\stdint.h"
 				>
 			</File>
+			<File
+				RelativePath=".\src\misc\windows.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="utils"
@@ -713,6 +718,14 @@
 			<File
 				RelativePath=".\src\utils\convert.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32"
 					>
@@ -757,6 +770,14 @@
 			<File
 				RelativePath=".\src\winiconv\win_iconv.c"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
 				<FileConfiguration
 					Name="Release|Win32"
 					>
@@ -852,11 +873,11 @@
 			>
 		</File>
 		<File
-			RelativePath=".\src\ProxyHandler.cpp"
+			RelativePath=".\src\ProxyServer.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\src\ProxyHandler.h"
+			RelativePath=".\src\ProxyServer.h"
 			>
 		</File>
 		<File
@@ -871,6 +892,14 @@
 			RelativePath=".\src\StdInc.cpp"
 			>
 			<FileConfiguration
+				Name="Debug|Win32"
+				>
+				<Tool
+					Name="VCCLCompilerTool"
+					UsePrecompiledHeader="1"
+				/>
+			</FileConfiguration>
+			<FileConfiguration
 				Name="Release|Win32"
 				>
 				<Tool
@@ -881,6 +910,22 @@
 		</File>
 		<File
 			RelativePath=".\src\StdInc.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\TcpClient.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\src\TcpClient.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\TcpServer.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\src\TcpServer.h"
 			>
 		</File>
 		<File

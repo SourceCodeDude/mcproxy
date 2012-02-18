@@ -3,6 +3,10 @@ class TcpServer;
 #ifndef _TCPSERVER_H
 #define _TCPSERVER_H
 
+#ifdef WIN32
+#define EV_STANDALONE // keeps ev from requiring config.h
+#define EV_SELECT_IS_WINSOCKET 1 // configure libev for windows select
+#endif
 #include "libev/ev.h"
 #include "TcpClient.h"
 

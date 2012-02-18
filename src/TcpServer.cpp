@@ -10,7 +10,12 @@ TcpServer::TcpServer()
 	setsockopt(m_iSocket, SOL_SOCKET, SO_REUSEADDR, (char *)&iOption, sizeof(iOption));
 	
 	// set non-blocking
+#ifdef WIN32
+    unsigned long iMode = 1;
+    ioctlsocket(m_iSocket, FIONBIO, &iMode);
+#else
 	fcntl(m_iSocket, F_SETFL, fcntl(m_iSocket, F_GETFL, 0) | O_NONBLOCK);
+#endif
 }
 
 TcpServer::TcpServer(int iSocket)
@@ -48,7 +53,7 @@ void TcpServer::listen(struct ev_loop *pLoop)
 	
 	// Initialize and start a watcher to accepts client requests
 	m_acceptHandle.pThis = this;
-	ev_io_init(&m_acceptHandle.io, &TcpServer::onAcceptHelper, m_iSocket, EV_READ);
+	ev_io_init(&m_acceptHandle.io, &TcpServer::onAcceptHelper, HANDLE_TO_FD(m_iSocket), EV_READ);
 	
 	ev_io_start(pLoop, &m_acceptHandle.io);
 }
@@ -75,15 +80,6 @@ void TcpServer::onReadWriteHelper(struct ev_loop *loop, struct ev_io *watcher, i
 	
 	CustomClientIO *pIO = (CustomClientIO *)watcher;
 	
-	if (revents & EV_READ)
-	{
-		pIO->pThis->onRead(loop, pIO, revents);
-	}
-	if (revents & EV_WRITE)
-	{
-		pIO->pThis->onWrite(loop, pIO, revents);
-	}
-	
 	if (pIO->pClient->m_strSendBuffer.empty())
 	{
 		ev_io_set(&pIO->io, pIO->io.fd, EV_READ);
@@ -92,16 +88,34 @@ void TcpServer::onReadWriteHelper(struct ev_loop *loop, struct ev_io *watcher, i
 	{
 		ev_io_set(&pIO->io, pIO->io.fd, EV_READ | EV_WRITE);
 	}
+
+	if (revents & EV_READ)
+	{
+		pIO->pThis->onRead(loop, pIO, revents);
+	}
+	if (revents & EV_WRITE)
+	{
+		pIO->pThis->onWrite(loop, pIO, revents);
+	}
 }
 
 void TcpServer::onAccept(struct ev_loop *loop, CustomIO *watcher, int revents)
 {
 	sockaddr_in client_addr;
-	socklen_t client_len = sizeof(client_addr);
-	int client_sd;
+#ifdef WIN32
+	int
+#else
+	socklen_t
+#endif
+	client_len = sizeof(client_addr);
 
 	// Accept client request
-	client_sd = accept(watcher->io.fd, (sockaddr *)&client_addr, &client_len);
+#ifdef WIN32
+	SOCKET
+#else
+	int
+#endif
+	client_sd = accept(FD_TO_HANDLE(watcher->io.fd), (sockaddr *)&client_addr, &client_len);
 
 	if (client_sd < 0)
 	{
@@ -110,9 +124,14 @@ void TcpServer::onAccept(struct ev_loop *loop, CustomIO *watcher, int revents)
 	}
 	
 	// set non-blocking
+#ifdef WIN32
+    unsigned long iMode = 1;
+    ioctlsocket(client_sd, FIONBIO, &iMode);
+#else
 	fcntl(client_sd, F_SETFL, fcntl(client_sd, F_GETFL, 0) | O_NONBLOCK);
+#endif
 	
-	printf("Successfully connected with client fd %d.\n", client_sd);
+	printf("Successfully connected with client fd %d.\n", HANDLE_TO_FD(client_sd));
 
 	CustomClientIO *w_client = new CustomClientIO;
 	w_client->pThis = this;
@@ -121,7 +140,7 @@ void TcpServer::onAccept(struct ev_loop *loop, CustomIO *watcher, int revents)
 	w_client->pClient->m_pOtherWatcher = &w_client->io;
 	
 	// Initialize and start watcher to read client requests
-	ev_io_init(&w_client->io, &TcpServer::onReadWriteHelper, client_sd, EV_READ | EV_WRITE);
+	ev_io_init(&w_client->io, &TcpServer::onReadWriteHelper, HANDLE_TO_FD(client_sd), EV_READ | EV_WRITE);
 	//ev_io_set(&w_client->io, client_sd, EV_READ);
 	ev_io_start(loop, &w_client->io);
 	
@@ -131,10 +150,14 @@ void TcpServer::onAccept(struct ev_loop *loop, CustomIO *watcher, int revents)
 void TcpServer::onRead(struct ev_loop *loop, CustomClientIO *watcher, int revents)
 {
 	char buffer[512];
-	ssize_t read;
 
 	// Receive message from client socket
-	read = recv(watcher->io.fd, buffer, sizeof(buffer), 0);
+#ifdef WIN32
+	int
+#else
+	ssize_t
+#endif
+	read = recv(FD_TO_HANDLE(watcher->io.fd), buffer, sizeof(buffer), 0);
 
 	if (read < 0)
 	{
@@ -162,7 +185,11 @@ void TcpServer::onWrite(struct ev_loop *loop, CustomClientIO *watcher, int reven
 		return;
 	}
 	
-	ssize_t iWritten = write(watcher->io.fd, watcher->pClient->m_strSendBuffer.c_str(), watcher->pClient->m_strSendBuffer.length());
+#ifdef WIN32
+	int iWritten = send(FD_TO_HANDLE(watcher->io.fd), watcher->pClient->m_strSendBuffer.c_str(), watcher->pClient->m_strSendBuffer.length(), 0);
+#else
+	ssize_t iWritten = write(FD_TO_HANDLE(watcher->io.fd), watcher->pClient->m_strSendBuffer.c_str(), watcher->pClient->m_strSendBuffer.length());
+#endif
 	if (iWritten < 0)
 	{
 		perror("write error");

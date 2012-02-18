@@ -24,10 +24,15 @@ void TcpClient::connect(struct ev_loop *pLoop, const char *szHostname, int iPort
 	setsockopt(m_iSocket, SOL_SOCKET, SO_REUSEADDR, (char *)&iOption, sizeof(iOption));
 	
 	// set non-blocking
+#ifdef WIN32
+    unsigned long iMode = 1;
+    ioctlsocket(m_iSocket, FIONBIO, &iMode);
+#else
 	fcntl(m_iSocket, F_SETFL, fcntl(m_iSocket, F_GETFL, 0) | O_NONBLOCK);
+#endif
 	
 	m_ioWatcher.pThis = this;
-	ev_io_init(&m_ioWatcher.io, &TcpClient::onReadWriteHelper, m_iSocket, EV_READ | EV_WRITE);
+	ev_io_init(&m_ioWatcher.io, &TcpClient::onReadWriteHelper, HANDLE_TO_FD(m_iSocket), EV_READ | EV_WRITE);
 	ev_io_start(pLoop, &m_ioWatcher.io);
 	
 	sockaddr_in addr;
@@ -86,10 +91,14 @@ void TcpClient::onReadWriteHelper(struct ev_loop *loop, struct ev_io *watcher, i
 void TcpClient::onRead(struct ev_loop *loop, CustomIO *watcher, int revents)
 {
 	char buffer[512];
-	ssize_t read;
 
 	// Receive message from client socket
-	read = recv(watcher->io.fd, buffer, sizeof(buffer), 0);
+#ifdef WIN32
+	int
+#else
+	ssize_t
+#endif
+	read = recv(FD_TO_HANDLE(watcher->io.fd), buffer, sizeof(buffer), 0);
 
 	if (read < 0)
 	{
@@ -115,7 +124,11 @@ void TcpClient::onWrite(struct ev_loop *loop, CustomIO *watcher, int revents)
 		return;
 	}
 	
-	ssize_t iWritten = write(watcher->io.fd, m_strSendBuffer.c_str(), m_strSendBuffer.length());
+#ifdef WIN32
+	int iWritten = ::send(FD_TO_HANDLE(watcher->io.fd), m_strSendBuffer.c_str(), m_strSendBuffer.length(), 0);
+#else
+	ssize_t iWritten = write(FD_TO_HANDLE(watcher->io.fd), m_strSendBuffer.c_str(), m_strSendBuffer.length());
+#endif
 	
 	if (iWritten < 0)
 	{
