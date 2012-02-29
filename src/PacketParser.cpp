@@ -7,7 +7,7 @@
 PacketParser::PacketParser(ePacketSource packetSource)
 	: m_packetSource(packetSource), m_iLastCompletePacket(-1)
 {
-	// converter UCS-2 -> UTF-8
+	// converter UCS-2BE -> UTF-8
 	m_iconv = iconv_open("UTF-8", "UCS-2BE");
 
 	m_pPacketHandlerHelper = new PacketHandlerHelper(this);
@@ -173,6 +173,7 @@ std::string PacketParser::getString()
 	if (iLength == 0)
 		return std::string("");
 
+	// TODO: don't use new, getBytes can throw an exception
 	uint16_t *tmp = new uint16_t[iLength];
 	getBytes((uint8_t *)tmp, iLength * 2);
 

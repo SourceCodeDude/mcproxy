@@ -5,14 +5,14 @@
 
 PacketWriter::PacketWriter()
 {
-	// converter UTF-8 -> UCS-2
-	m_iconv = iconv_open("UCS-2", "UTF-8");
+	// converter UTF-8 -> UCS-2BE
+	m_iconv = iconv_open("UCS-2BE", "UTF-8");
 }
 
 PacketWriter::PacketWriter(size_t iAllocSize)
 {
-	// converter UTF-8 -> UCS-2
-	m_iconv = iconv_open("UCS-2", "UTF-8");
+	// converter UTF-8 -> UCS-2BE
+	m_iconv = iconv_open("UCS-2BE", "UTF-8");
 
 	m_strBuffer.reserve(iAllocSize);
 }

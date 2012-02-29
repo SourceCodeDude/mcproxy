@@ -1,7 +1,6 @@
 #include "StdInc.h"
 #include <assert.h>
 #include <string>
-//#include <SocketHandler.h>
 #include "Endian.h"
 #include "Authentication.h"
 #include "Packets.h"
@@ -9,84 +8,8 @@
 #include "BotClient.h"
 #include "ProxyServer.h"
 
-#if 0
-class MyBot : public BotClient
-{
-public:
-	MyBot(ISocketHandler &h)
-		: BotClient("lolbot", h)
-	{
-		m_bHasPosition = false;
-	}
-
-	void update()
-	{
-		if (m_bHasPosition)
-		{
-			PacketWriter w;
-			PlayerPosition update;
-			update.writePacket(&w, (double)m_fX, (double)m_fY, (double)m_fY + 1.62, (double)m_fZ, true);
-			w.send(this);
-		}
-	}
-
-private:
-	void onConnected()
-	{
-		printf("we're connected\n");
-	}
-
-	void onKick(const std::string &strMessage)
-	{
-		printf("[KICK] %s\n", strMessage.c_str());
-	}
-
-	void onChat(const std::string &strMessage)
-	{		
-		printf("[CHAT] %s\n", strMessage.c_str());
-
-		/*PacketWriter w;
-		Chat packet;
-		packet.writePacket(&w, "hello there");
-		w.send(this);*/
-	}
-
-	void onSpawnPosition(int iX, int iY, int iZ)
-	{
-		printf("got spawn position (%.2f, %.2f, %.2f)\n", m_fX, m_fY, m_fZ);
-	}
-
-	void onHealthUpdate(short iHealth, short iFood, float fSaturation)
-	{
-		printf("hp %d\n", iHealth);
-		if (iHealth <= 0)
-		{
-			printf("Dead, respawning.\n");
-
-			PacketWriter w;
-			Respawn respawn;
-			respawn.writePacket(&w, 0, 1, 0, 128, 0LL, "");
-			w.send(this);
-		}
-	}
-
-	void onPlayerPositionLook(double dX, double dStance, double dY, double dZ, float fYaw, float fPitch, bool bGround)
-	{
-		printf("got 0x0D, %.2f/%.2f/%.2f, %d\n", (float) dX, (float) dY, (float) dZ, bGround ? 1 : 0);
-		m_bHasPosition = true;
-		m_fX = (float) dX;
-		m_fY = (float) dY;
-		m_fZ = (float) dZ;
-	}
-
-	bool m_bHasPosition;
-	float m_fX, m_fY, m_fZ;
-};
-#endif
-
 #include "ProxyClient.h"
 #include "ProxySocket.h"
-//#include <ListenSocket.h>
 #include "utils/Timer.h"
 
 #if 0
@@ -119,9 +42,6 @@ private:
 };
 #endif
 
-//#include "ProxyHandler.h"
-//#include <StdoutLog.h>
-
 struct ev_loop *g_pLoop = NULL;
 
 class MyProxyClient : public ProxyClient
@@ -129,8 +49,37 @@ class MyProxyClient : public ProxyClient
 public:
 	MyProxyClient(ProxySocket *pSocket)
 		: ProxyClient(pSocket)
-	{		
-		connect(g_pLoop, "91.121.178.221", 25565);
+	{
+		connect(g_pLoop, "188.165.193.78", 25565);
+//		connect(g_pLoop, "91.121.178.221", 25565);
+	}
+
+private:
+	void onChat(const std::string &strMessage)
+	{
+		if (!isServerPacket())
+			return;
+
+		printf("[CHAT] %s\n", strMessage.c_str());
+
+
+		std::string sHaystack = "\xC2§c* First player who types '\xC2§4";
+		if (strMessage.length() > sHaystack.length() && strMessage.substr(0, sHaystack.length()) == sHaystack)
+		{
+			std::string sChallenge = strMessage.substr(sHaystack.length());
+			std::string::size_type iIndex = sChallenge.find("\xC2§c'");
+			if (iIndex != std::string::npos)
+			{
+				sChallenge = sChallenge.substr(0, iIndex);
+
+				printf("CHALLENGE: '%s'\n", sChallenge.c_str());
+
+				PacketWriter w;
+	                        Chat pack;
+	                        pack.writePacket(&w, sChallenge);
+	                        w.send(this);
+			}
+		}
 	}
 };
 
@@ -192,7 +141,7 @@ int main(int argc, char *argv[])
 	g_pLoop = ev_default_loop(0);
 
 	MyProxyServer server;
-	server.bind(25565);
+	server.bind(25566);
 	server.listen(g_pLoop);
 
 	// Start infinite loop
